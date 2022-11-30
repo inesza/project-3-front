@@ -38,7 +38,6 @@ const FormSignUp = () => {
   ];
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     apiHandler
       .signup(formData)
       .then(() => {
