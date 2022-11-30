@@ -46,7 +46,7 @@ const FormSignUp = () => {
         // navigate("/signin");
       })
       .catch((error) => {
-        setError(error.response.data);
+        setError(error.response);
       });
   };
   return (
@@ -63,7 +63,7 @@ const FormSignUp = () => {
         <div style={{ width: "50%", background: "red" }}></div>
       </div>
       <div>Forms</div>
-      <form onClick={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         {stepsList[page]}
         <br />
         {page === 1 && <button>Submit</button>}
