@@ -9,9 +9,31 @@ import axios from "axios";
 
 const NewMigraine = () => {
   const navigate = useNavigate();
+
+  //Setting the user ID for the form
+  const [userID, setUserID] = useState(null);
+
+  useEffect(() => {
+    async function getUserID() {
+      const user = await apiHandler.isLoggedIn();
+      setUserID(user._id);
+    }
+    getUserID();
+    // console.log("userID", userID);
+    // service
+    //   .get("/api/auth/me")
+    //   .then((res) => {
+    //     console.log(res.data._id);
+    //     setUserID(res.data._id);
+    //   })
+    //   .catch((e) => console.log(e));
+  }, []);
+
+  // Defining the today's date for the start date of migraine crisis
   const rightNow = new Date().toISOString().split(".")[0].slice(0, -3);
   const [startDate, setStartDate] = useState(rightNow);
-  const [formError, setFormError] = useState(false);
+
+  // Handling the "phases" checkboxes values for the form
   const [checkboxData, setCheckboxData, resetCheckbox] = useCheckbox({
     Prodrome: false,
     Postdrome: false,
@@ -19,21 +41,20 @@ const NewMigraine = () => {
     Headache: false,
     "Other/Unsure": false,
   });
-  var someDate = new Date();
-  var date = someDate.setDate(someDate.getDate());
-  var defaultValue = new Date().toISOString().split("T")[0];
 
   const [formData, setFormData] = useState({
     start_date: startDate,
-    end_date: null,
-    intensity: null,
+    end_date: "",
+    intensity: 0,
     notes: "",
+    user: userID,
   });
   const { start_date, end_date, intensity, notes } = formData;
 
   const handleSubmit = async (event) => {
     try {
-      console.log(formData.start_date);
+      console.log("======", userID);
+      console.log("+++++++", formData);
       event.preventDefault();
       const phases = [];
       for (const phase in checkboxData) {
@@ -42,12 +63,9 @@ const NewMigraine = () => {
         }
       }
       formData["phases"] = phases;
-      const { data } = await axios.post(
-        "http://localhost:8080/api/migraines",
-        formData
-      );
+      formData["user"] = userID;
+      const { data } = await service.post("/api/migraines", formData);
       console.log("New migraine: ", data);
-      setFormError(false);
       navigate("/migraines/trackers");
     } catch (error) {
       console.log(error);
@@ -64,10 +82,10 @@ const NewMigraine = () => {
             type="datetime-local"
             name="start-date"
             id="start-date"
-            value={startDate}
+            value={start_date}
             onChange={(event) => {
               setStartDate(event.target.value);
-              setFormData({ ...formData, start_date: startDate });
+              setFormData({ ...formData, start_date: event.target.value });
             }}
           />
         </div>
@@ -78,9 +96,9 @@ const NewMigraine = () => {
             name="end-date"
             id="end-date"
             value={end_date}
-            onChange={(event) =>
-              setFormData({ ...formData, end_date: event.target.value })
-            }
+            onChange={(event) => {
+              setFormData({ ...formData, end_date: event.target.value });
+            }}
           />
         </div>
         <div>
