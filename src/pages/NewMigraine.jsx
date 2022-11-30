@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import useForm from "../hooks/useForm";
 import useCheckbox from "../hooks/useCheckbox";
 import apiHandler from "./../api/apiHandler";
@@ -7,6 +8,10 @@ import service from "./../api/apiHandler";
 import axios from "axios";
 
 const NewMigraine = () => {
+  const navigate = useNavigate();
+  const rightNow = new Date().toISOString().split(".")[0].slice(0, -3);
+  const [startDate, setStartDate] = useState(rightNow);
+  const [formError, setFormError] = useState(false);
   const [checkboxData, setCheckboxData, resetCheckbox] = useCheckbox({
     Prodrome: false,
     Postdrome: false,
@@ -14,8 +19,12 @@ const NewMigraine = () => {
     Headache: false,
     "Other/Unsure": false,
   });
+  var someDate = new Date();
+  var date = someDate.setDate(someDate.getDate());
+  var defaultValue = new Date().toISOString().split("T")[0];
+
   const [formData, setFormData] = useState({
-    start_date: null,
+    start_date: startDate,
     end_date: null,
     intensity: null,
     notes: "",
@@ -24,6 +33,7 @@ const NewMigraine = () => {
 
   const handleSubmit = async (event) => {
     try {
+      console.log(formData.start_date);
       event.preventDefault();
       const phases = [];
       for (const phase in checkboxData) {
@@ -37,6 +47,8 @@ const NewMigraine = () => {
         formData
       );
       console.log("New migraine: ", data);
+      setFormError(false);
+      navigate("/migraines/trackers");
     } catch (error) {
       console.log(error);
     }
@@ -52,10 +64,11 @@ const NewMigraine = () => {
             type="datetime-local"
             name="start-date"
             id="start-date"
-            value={start_date}
-            onChange={(event) =>
-              setFormData({ ...formData, start_date: event.target.value })
-            }
+            value={startDate}
+            onChange={(event) => {
+              setStartDate(event.target.value);
+              setFormData({ ...formData, start_date: startDate });
+            }}
           />
         </div>
         <div>
