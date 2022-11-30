@@ -12,8 +12,12 @@ const FormSignUpStep2 = ({ page, setPage, formData, setFormData, x, setX }) => {
         name="gender"
         id="gender"
         value={formData.value}
+        defaultValue={"DEFAULT"}
         onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
       >
+        <option value="DEFAULT" disabled>
+          -- Gender
+        </option>
         <option value="male">Male</option>
         <option value="female">Female</option>
         <option value="nb-gf">Non binary / Gender fluid</option>
