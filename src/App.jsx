@@ -22,7 +22,7 @@ function App() {
           {/* All routes after the PrivateRoute require the user to be loggedIn */}
           <Route path="/profile" element={<Profile />} />
         </Route>
-        <Route path="/new-migraine" element={<NewMigraine />} />
+        <Route path="/migraines" element={<NewMigraine />} />
       </Routes>
     </div>
   );
