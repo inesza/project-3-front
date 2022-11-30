@@ -7,6 +7,7 @@ import Profile from "./pages/Profile";
 import PrivateRoute from "./components/ProtectedRoute/PrivateRoute";
 import LoggedOut from "./components/LoggedOut/LoggedOut";
 import NewMigraine from "./pages/NewMigraine";
+import Trackers from "./pages/Trackers";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
         </Route>
         <Route path="/migraines" element={<NewMigraine />} />
+        <Route path="/migraines/trackers" element={<Trackers />} />
       </Routes>
     </div>
   );
