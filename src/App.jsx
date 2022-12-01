@@ -8,6 +8,8 @@ import PrivateRoute from "./components/ProtectedRoute/PrivateRoute";
 import LoggedOut from "./components/LoggedOut/LoggedOut";
 import NewMigraine from "./pages/NewMigraine";
 import Trackers from "./pages/Trackers";
+import MigraineJournalFull from "./components/Migraines/MigraineJournalFull";
+import MigraineSingle from "./components/Migraines/MigraineSingle";
 
 function App() {
   return (
@@ -21,7 +23,11 @@ function App() {
         </Route>
         <Route element={<PrivateRoute />}>
           {/* All routes after the PrivateRoute require the user to be loggedIn */}
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile">
+            <Route index element={<Profile />} />
+            <Route path="migraine-journal" element={<MigraineJournalFull />} />
+            <Route path="migraine/:id" element={<MigraineSingle />} />
+          </Route>
           <Route path="/migraines" element={<NewMigraine />} />
           <Route path="/migraines/trackers" element={<Trackers />} />
         </Route>
