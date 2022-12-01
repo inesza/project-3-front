@@ -8,6 +8,7 @@ import PrivateRoute from "./components/ProtectedRoute/PrivateRoute";
 import LoggedOut from "./components/LoggedOut/LoggedOut";
 import NewMigraine from "./pages/NewMigraine";
 import Trackers from "./pages/Trackers";
+import FormNewMigraineStep2 from "./components/Forms/FormNewMigraine/FormNewMigraineStep2";
 
 function App() {
   return (
@@ -23,7 +24,10 @@ function App() {
           {/* All routes after the PrivateRoute require the user to be loggedIn */}
           <Route path="/profile" element={<Profile />} />
           <Route path="/migraines" element={<NewMigraine />} />
-          <Route path="/migraines/trackers" element={<Trackers />} />
+          <Route
+            path="/migraines/trackers"
+            element={<FormNewMigraineStep2 />}
+          />
         </Route>
       </Routes>
     </div>
