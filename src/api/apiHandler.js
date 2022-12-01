@@ -15,7 +15,6 @@ apiHandler.interceptors.request.use((config) => {
 function errorHandler(error) {
   if (error.data) {
     console.log(error.data && error.data.message);
-    throw error;
   }
   throw error;
 }
