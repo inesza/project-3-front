@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useForm from "../hooks/useForm";
@@ -6,28 +6,23 @@ import useCheckbox from "../hooks/useCheckbox";
 import apiHandler from "./../api/apiHandler";
 import service from "./../api/apiHandler";
 import axios from "axios";
+import UserContext from "../auth/UserContext";
 
 const NewMigraine = () => {
   const navigate = useNavigate();
 
   //Setting the user ID for the form
-  const [userID, setUserID] = useState(null);
-
-  useEffect(() => {
-    async function getUserID() {
-      const user = await apiHandler.isLoggedIn();
-      setUserID(user._id);
-    }
-    getUserID();
-    // console.log("userID", userID);
-    // service
-    //   .get("/api/auth/me")
-    //   .then((res) => {
-    //     console.log(res.data._id);
-    //     setUserID(res.data._id);
-    //   })
-    //   .catch((e) => console.log(e));
-  }, []);
+  //   const [userID, setUserID] = useState(null);
+  //   const { currentUser } = useContext(UserContext);
+  //   console.log(currentUser);
+  //   useEffect(() => {
+  //     async function getUserID() {
+  //       const user = await apiHandler.isLoggedIn();
+  //       console.log(user._id);
+  //       setUserID(user._id);
+  //     }
+  //     getUserID();
+  //   }, []);
 
   // Defining the today's date for the start date of migraine crisis
   const rightNow = new Date().toISOString().split(".")[0].slice(0, -3);
@@ -47,13 +42,11 @@ const NewMigraine = () => {
     end_date: "",
     intensity: 0,
     notes: "",
-    user: userID,
   });
   const { start_date, end_date, intensity, notes } = formData;
 
   const handleSubmit = async (event) => {
     try {
-      console.log("======", userID);
       console.log("+++++++", formData);
       event.preventDefault();
       const phases = [];
@@ -63,7 +56,7 @@ const NewMigraine = () => {
         }
       }
       formData["phases"] = phases;
-      formData["user"] = userID;
+      //   formData["user"] = userID;
       const { data } = await service.post("/api/migraines", formData);
       console.log("New migraine: ", data);
       navigate("/migraines/trackers");
