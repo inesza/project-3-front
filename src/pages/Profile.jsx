@@ -7,7 +7,7 @@ import MigraineSummaryCard from "../components/Migraines/MigraineSummaryCard";
 const Profile = () => {
   const { isLoggedIn, currentUser, removeUser } = useAuth();
   const [migraines, setMigraines] = useState([]);
-  const lastMigraines = migraines.slice(0, 3);
+  const lastMigraines = migraines.slice(0, 2);
   useEffect(() => {
     service.getAllMigraines().then((data) => {
       setMigraines(data);
@@ -16,7 +16,6 @@ const Profile = () => {
   if (!migraines.length) {
     return <div className="loading">Loading...</div>;
   }
-  console.log(migraines);
   return (
     <section>
       <div>
@@ -26,9 +25,9 @@ const Profile = () => {
       <section className="migraine-journal">
         Migraine journal
         {lastMigraines.map((migraine) => {
-          return <MigraineSummaryCard migraine={migraine} />;
+          return <MigraineSummaryCard migraine={migraine} key={migraine._id} />;
         })}
-        <Link to="/migraines/all">Older entries</Link>
+        <Link to="/profile/migraine-journal">Older entries</Link>
       </section>
       <section className="stats">Stats</section>
     </section>
