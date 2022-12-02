@@ -1,30 +1,66 @@
 import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import useForm from "../hooks/useForm";
 import useCheckbox from "../hooks/useCheckbox";
 import apiHandler from "./../api/apiHandler";
 import service from "./../api/apiHandler";
 import axios from "axios";
 import UserContext from "../auth/UserContext";
+import Trackers from "./Trackers";
 
 const NewMigraine = () => {
   const navigate = useNavigate();
+  const [trackersCategory, setTrackersCategory] = useState([]);
+  const [trackers, setTrackers] = useState([]);
+  const [trackersSubCategory, setTrackersSubCategory] = useState([]);
+  const [checkboxCategoryData, setCheckboxCategoryData, resetCheckboxCategory] =
+    useCheckbox({
+      Nutrition: false,
+      Activities: false,
+      Environment: false,
+      Health: false,
+    });
+  //   const [
+  //     checkboxSubCategoryData,
+  //     setCheckboxSubCategoryData,
+  //     resetCheckboxSubCategory,
+  //   ] = useCheckbox({ ...trackers });
 
-  //Setting the user ID for the form
-  //   const [userID, setUserID] = useState(null);
-  //   const { currentUser } = useContext(UserContext);
-  //   console.log(currentUser);
-  //   useEffect(() => {
-  //     async function getUserID() {
-  //       const user = await apiHandler.isLoggedIn();
-  //       console.log(user._id);
-  //       setUserID(user._id);
-  //     }
-  //     getUserID();
-  //   }, []);
+  useEffect(() => {
+    service.get("/api/trackers").then((res) => {
+      console.log(res.data);
+      setTrackersCategory(
+        res.data.allTrackersCategory.map((t) => {
+          return { name: t.name, status: false, _id: t._id };
+        })
+      );
+      setTrackersSubCategory(
+        res.data.allTrackersSubCategory.map((t) => {
+          return {
+            name: t.name,
+            status: false,
+            _id: t._id,
+            category: t.category,
+          };
+        })
+      );
+      setTrackers(
+        res.data.allTrackers.map((t) => {
+          return {
+            name: t.name,
+            status: false,
+            _id: t._id,
+            subcategory: t.subcategory,
+          };
+        })
+      );
+    });
+  }, []);
+  console.log("===========", trackers);
 
-  // Defining the today's date for the start date of migraine crisis
+  // Defining the today's date in UT for the start date of migraine crisis
   const rightNow = new Date().toISOString().split(".")[0].slice(0, -3);
   const [startDate, setStartDate] = useState(rightNow);
 
@@ -47,8 +83,11 @@ const NewMigraine = () => {
 
   const handleSubmit = async (event) => {
     try {
-      console.log("+++++++", formData);
       event.preventDefault();
+      const cat = trackersCategory.filter((x) => x.status);
+      const subCat = trackersSubCategory.filter((x) => x.status);
+      const track = trackers.filter((x) => x.status);
+      const arr = [...cat, ...subCat, ...track];
       const phases = [];
       for (const phase in checkboxData) {
         if (checkboxData[phase]) {
@@ -56,13 +95,49 @@ const NewMigraine = () => {
         }
       }
       formData["phases"] = phases;
-      //   formData["user"] = userID;
       const { data } = await service.post("/api/migraines", formData);
       console.log("New migraine: ", data);
+
       navigate("/migraines/trackers");
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleSubCategory = (id) => {
+    const copy = JSON.parse(JSON.stringify(trackersSubCategory));
+    setTrackersSubCategory(
+      copy.map((category) => {
+        if (id === category._id) {
+          category.status = !category.status;
+        }
+        return category;
+      })
+    );
+  };
+
+  const handleTracker = (id) => {
+    const copy = JSON.parse(JSON.stringify(trackers));
+    setTrackers(
+      copy.map((category) => {
+        if (id === category._id) {
+          category.status = !category.status;
+        }
+        return category;
+      })
+    );
+  };
+
+  const handleCategory = (id) => {
+    const copy = JSON.parse(JSON.stringify(trackersCategory));
+    setTrackersCategory(
+      copy.map((category) => {
+        if (id === category._id) {
+          category.status = !category.status;
+        }
+        return category;
+      })
+    );
   };
 
   return (
@@ -89,6 +164,7 @@ const NewMigraine = () => {
             name="end-date"
             id="end-date"
             value={end_date}
+            min={start_date}
             onChange={(event) => {
               setFormData({ ...formData, end_date: event.target.value });
             }}
@@ -140,6 +216,130 @@ const NewMigraine = () => {
             }
           ></textarea>
         </div>
+        <h2>Trackers Category</h2>
+        <ul>
+          {trackersCategory.map((trackerCategory) => {
+            return (
+              <div key={trackerCategory._id}>
+                <label htmlFor={trackerCategory.name}>
+                  {trackerCategory.name}
+                </label>
+                {/* <input
+                  type="checkbox"
+                  id={trackerCategory.name}
+                  name={trackerCategory.name}
+                  value={trackerCategory.name}
+                  onChange={setCheckboxCategoryData}
+                  checked={checkboxCategoryData[trackerCategory.name]}
+                /> */}
+                <input
+                  type="checkbox"
+                  id={trackerCategory.name}
+                  name={trackerCategory.name}
+                  value={trackerCategory.name}
+                  onChange={() => handleCategory(trackerCategory._id)}
+                  checked={trackerCategory.status}
+                />
+
+                {trackerCategory.status &&
+                  trackersSubCategory
+                    .filter(
+                      (trackerSubCategory) =>
+                        trackerSubCategory.category === trackerCategory._id
+                    )
+                    .map((trackerSubCategory) => {
+                      return (
+                        <div>
+                          <div key={trackerSubCategory._id}>
+                            <label htmlFor={trackerSubCategory.name}>
+                              {trackerSubCategory.name}
+                            </label>
+                            <input
+                              type="checkbox"
+                              id={trackerSubCategory.name}
+                              name={trackerSubCategory.name}
+                              value={trackerSubCategory.name}
+                              checked={trackerSubCategory.status}
+                              onChange={() =>
+                                handleSubCategory(trackerSubCategory._id)
+                              }
+                            />
+                          </div>
+                          {trackerSubCategory.status &&
+                            trackers
+                              .filter(
+                                (tracker) =>
+                                  tracker.subcategory === trackerSubCategory._id
+                              )
+                              .map((tracker) => {
+                                return (
+                                  <div key={tracker._id}>
+                                    <label htmlFor={tracker.name}>
+                                      {tracker.name}
+                                    </label>
+                                    <input
+                                      type="checkbox"
+                                      id={tracker.name}
+                                      name={tracker.name}
+                                      value={tracker.name}
+                                      checked={tracker.status}
+                                      onChange={() =>
+                                        handleTracker(tracker._id)
+                                      }
+                                    />
+                                  </div>
+                                );
+                              })}
+                        </div>
+                      );
+                    })}
+              </div>
+            );
+          })}
+        </ul>
+        {!trackersSubCategory.length !== 0 && (
+          <>
+            <h2>Trackers Subcategory</h2>
+            <ul>
+              {trackersSubCategory.map((trackerSubCategory) => {
+                return (
+                  <div key={trackerSubCategory._id}>
+                    <label htmlFor={trackerSubCategory.name}>
+                      {trackerSubCategory.name}
+                    </label>
+                    <input
+                      type="checkbox"
+                      id={trackerSubCategory.name}
+                      name={trackerSubCategory.name}
+                      value={trackerSubCategory.name}
+                    />
+                  </div>
+                );
+              })}
+            </ul>
+          </>
+        )}
+        {!trackers.length !== 0 && (
+          <>
+            <h2>Trackers</h2>
+            <ul>
+              {trackers.map((tracker) => {
+                return (
+                  <div key={tracker._id}>
+                    <label htmlFor={tracker.name}>{tracker.name}</label>
+                    <input
+                      type="checkbox"
+                      id={tracker.name}
+                      name={tracker.name}
+                      value={tracker.name}
+                    />
+                  </div>
+                );
+              })}
+            </ul>
+          </>
+        )}
+
         <button>Add new migraine</button>
       </form>
     </div>

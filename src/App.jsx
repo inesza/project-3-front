@@ -8,6 +8,7 @@ import PrivateRoute from "./components/ProtectedRoute/PrivateRoute";
 import LoggedOut from "./components/LoggedOut/LoggedOut";
 import NewMigraine from "./pages/NewMigraine";
 import Trackers from "./pages/Trackers";
+import FormNewMigraineStep2 from "./components/Forms/FormNewMigraine/FormNewMigraineStep2";
 import MigraineJournalFull from "./components/Migraines/MigraineJournalFull";
 import MigraineSingle from "./components/Migraines/MigraineSingle";
 import NewMigraineButton from "./components/Migraines/NewMigraineButton";
@@ -27,14 +28,13 @@ function App() {
             {/* All routes after the PrivateRoute require the user to be loggedIn */}
             <Route path="/profile" element={<NewMigraineButton />}>
               <Route index element={<Profile />} />
-              <Route
-                path="migraine-journal"
-                element={<MigraineJournalFull />}
-              />
-              <Route path="migraine/:id" element={<MigraineSingle />} />
             </Route>
-            <Route path="/migraines/create" element={<NewMigraine />} />
-            <Route path="/migraines/trackers" element={<Trackers />} />
+            <Route path="/migraines">
+              <Route index element={<MigraineJournalFull />} />
+              <Route path="/:id" element={<MigraineSingle />} />
+              <Route path="/create" element={<NewMigraine />} />
+              <Route path="/trackers" element={<FormNewMigraineStep2 />} />
+            </Route>
           </Route>
         </Routes>
       </main>
