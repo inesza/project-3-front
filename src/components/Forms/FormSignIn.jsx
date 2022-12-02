@@ -32,20 +32,22 @@ const FormSignIn = () => {
     <>
       {error && <h3 className="error">{error.message}</h3>}
       <form onSubmit={handleSubmit}>
-        <h2>Signin</h2>
-        <label htmlFor="email">Email</label>
+        <h2>Log in</h2>
+
         <input
           type="email"
           id="email"
           name="email"
+          placeholder="Email *"
           onChange={handleChange}
           value={email}
         />
-        <label htmlFor="password">Password</label>
+
         <input
           type="password"
           id="password"
           name="password"
+          placeholder="Password *"
           onChange={handleChange}
           value={password}
         />

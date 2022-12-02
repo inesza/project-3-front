@@ -1,4 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Asap+Condensed:wght@300;500&display=swap');
+
+:root {
+	--abril: 'Abril Fatface', cursive;
+	--asap: 'Asap Condensed', sans-serif;
+	--darkest: #2D3142;
+	--dark-blue: #4F5D75;
+	--mint-green: #B9F6D2;
+	--lilac: #D3CFFF;
+	--orange: #EF8354;
+	--white: #ffffff;
+	--shadow-solid-orange: 4px 4px 0px var(--orange);
+	--shadow-solid-lilac: 4px 4px 0px var(--lilac);
+	--shadow-solid-mint: 4px 4px 0 var(--mint-green);
+}
 
 * {
 	margin: 0;
@@ -7,7 +21,8 @@
 }
 
 html {
-	font-family: "Manrope", sans-serif;
+	font-family: var(--asap);
+	font-weight: 300;
 }
 
 a {
@@ -17,4 +32,98 @@ a {
 
 ul {
 	list-style-type: none;
+}
+
+body {
+	width: 100%;
+	min-height: 100vh;
+	background: var(--dark-blue);
+	color: var(--white);
+	position: relative;
+}
+
+h1,
+h2 {
+	font-family: var(--abril);
+	font-weight: normal;
+	text-align: center;
+}
+
+main {
+	margin-top: 70px;
+}
+
+main> :first-child {
+	padding: 1em;
+}
+
+.btn,
+form button {
+	padding: .5em 2em;
+	border: 1px solid black;
+	display: inline-block;
+}
+
+.btn-orange {
+	background: var(--orange);
+	border: 1px solid var(--white);
+}
+
+form,
+form>div {
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	max-width: 400px;
+	margin: 0 auto;
+	gap: 1em;
+}
+
+form input,
+form textarea,
+form select {
+	background: white;
+	border: none;
+	border-radius: 0;
+	box-shadow: var(--shadow-solid-lilac);
+	padding: .5em;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+	border: none;
+	outline: none;
+	box-shadow: var(--shadow-solid-mint);
+}
+
+form button {
+	margin: 1em;
+	background: var(--orange);
+	color: white;
+	border: 3px solid var(--darkest);
+	box-shadow: 7px 7px 0px #B9F7D2;
+}
+
+.progress-bar-container {
+	display: flex;
+	height: 20px;
+	background: var(--dark-blue);
+	border-radius: 50px;
+	overflow: hidden;
+	margin: 2em 1em;
+}
+
+.progress-bar {
+	width: 50%;
+	height: 100%;
+	background: var(--mint-green);
+}
+
+section.dark-bg-orange-shadow {
+	background: var(--darkest);
+	border-radius: 10px;
+	box-shadow: var(--shadow-solid-orange);
+	margin: 1em auto;
+	padding: 1em;
 }

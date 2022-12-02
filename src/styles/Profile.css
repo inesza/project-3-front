@@ -1,0 +1,22 @@
+.profile-new-migraine-button {
+    background: var(--mint-green);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 1em;
+    text-align: center;
+    color: var(--dark-blue);
+    text-transform: uppercase;
+}
+
+.profile h1 {
+    font-family: var(--abril);
+    text-align: center;
+    font-size: 3em;
+    font-weight: normal;
+}
+
+.profile .edit-profile {
+    text-align: right;
+    margin-bottom: 1em;
+}

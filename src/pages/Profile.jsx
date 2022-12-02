@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import useAuth from "../auth/useAuth";
 import service from "../api/ApiHandler";
 import MigraineSummaryCard from "../components/Migraines/MigraineSummaryCard";
+import "../styles/Profile.css";
 
 const Profile = () => {
   const { isLoggedIn, currentUser, removeUser } = useAuth();
@@ -17,9 +18,11 @@ const Profile = () => {
     return <div className="loading">Loading...</div>;
   }
   return (
-    <section>
-      <div>
-        <Link to="/profile/edit">Edit my profile</Link>
+    <section className="profile dark-bg-orange-shadow ">
+      <div className="edit-profile">
+        <Link to="/profile/edit" className="btn btn-orange">
+          Edit my profile
+        </Link>
       </div>
       <h1>Hello {currentUser.username}!</h1>
       <section className="migraine-journal">
