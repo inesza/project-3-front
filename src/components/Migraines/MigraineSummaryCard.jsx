@@ -38,7 +38,7 @@ const MigraineSummaryCard = ({ migraine }) => {
       <br />
       Intensity: {migraine.intensity}/10 <br />
       Duration: {duration}
-      <Link to={`/profile/migraine/${migraine._id}`}>View details</Link>
+      <Link to={`/migraines/${migraine._id}`}>View details</Link>
     </article>
   );
 };
