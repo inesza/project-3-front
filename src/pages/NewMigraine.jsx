@@ -30,13 +30,34 @@ const NewMigraine = () => {
   const [startDate, setStartDate] = useState(rightNow);
 
   // Handling the "phases" checkboxes values for the form
-  const [checkboxData, setCheckboxData, resetCheckbox] = useCheckbox({
-    Prodrome: false,
-    Postdrome: false,
-    Aura: false,
-    Headache: false,
-    "Other/Unsure": false,
-  });
+  const [checkboxData, setCheckboxData, resetCheckbox] = useCheckbox([
+    {
+      value: "Prodrome",
+      status: false,
+      img: "/images/formImages/prodrome.svg",
+    },
+    {
+      value: "Postdrome",
+      status: false,
+      img: "/images/formImages/postdrome.svg",
+    },
+    {
+      value: "Aura",
+      status: false,
+      img: "/images/formImages/aura.svg",
+    },
+
+    {
+      value: "Headache",
+      status: false,
+      img: "/images/formImages/headache.svg",
+    },
+    {
+      value: "Other/Unsure",
+      status: false,
+      img: "/images/formImages/other.svg",
+    },
+  ]);
 
   const [formData, setFormData] = useState({
     start_date: startDate,
@@ -90,6 +111,7 @@ const NewMigraine = () => {
       const arr = [...cat, ...subCat, ...track];
       const phases = [];
       for (const phase in checkboxData) {
+        console.log(phase);
         if (checkboxData[phase]) {
           phases.push(phase);
         }
@@ -202,20 +224,19 @@ const NewMigraine = () => {
         <div className="phases">
           <div>Phases:</div>
 
-          {Object.keys(checkboxData).map((phase, index) => {
+          {checkboxData.map((phase, index) => {
             return (
-              <div className="phase-checkbox">
-                <label htmlFor={phase}>
+              <div key={phase.value} className="phase-checkbox">
+                <label htmlFor={phase.value}>
                   <input
-                    key={phase}
                     type="checkbox"
-                    id={phase}
-                    name={phase}
-                    value={phase}
+                    id={phase.value}
+                    name={phase.value}
+                    value={phase.value}
                     onChange={setCheckboxData}
-                    checked={checkboxData[phase]}
+                    checked={checkboxData[phase.status]}
                   />
-                  <span>{phase}</span>
+                  <span>{phase.value}</span>
                 </label>
               </div>
             );
@@ -243,14 +264,6 @@ const NewMigraine = () => {
                   <label htmlFor={trackerCategory.name}>
                     {trackerCategory.name}
                   </label>
-                  {/* <input
-                  type="checkbox"
-                  id={trackerCategory.name}
-                  name={trackerCategory.name}
-                  value={trackerCategory.name}
-                  onChange={setCheckboxCategoryData}
-                  checked={checkboxCategoryData[trackerCategory.name]}
-                /> */}
                   <input
                     type="checkbox"
                     id={trackerCategory.name}
