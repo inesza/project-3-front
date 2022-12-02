@@ -30,7 +30,7 @@ const NewMigraine = () => {
   const [startDate, setStartDate] = useState(rightNow);
 
   // Handling the "phases" checkboxes values for the form
-  const [checkboxData, setCheckboxData, resetCheckbox] = useCheckbox([
+  const [checkboxData, setCheckboxData] = useState([
     {
       value: "Prodrome",
       status: false,
@@ -111,7 +111,6 @@ const NewMigraine = () => {
       const arr = [...cat, ...subCat, ...track];
       const phases = [];
       for (const phase in checkboxData) {
-        console.log(phase);
         if (checkboxData[phase]) {
           phases.push(phase);
         }
@@ -138,6 +137,17 @@ const NewMigraine = () => {
           category.status = !category.status;
         }
         return category;
+      })
+    );
+  };
+  const handlePhases = (value) => {
+    const copy = JSON.parse(JSON.stringify(checkboxData));
+    setCheckboxData(
+      copy.map((phase) => {
+        if (value === phase.value) {
+          phase.status = !phase.status;
+        }
+        return phase;
       })
     );
   };
@@ -233,8 +243,8 @@ const NewMigraine = () => {
                     id={phase.value}
                     name={phase.value}
                     value={phase.value}
-                    onChange={setCheckboxData}
-                    checked={checkboxData[phase.status]}
+                    onChange={() => handlePhases(phase.value)}
+                    checked={phase.status}
                   />
                   <span>{phase.value}</span>
                 </label>
