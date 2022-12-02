@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import UserProvider from "./auth/UserProvider";
 import "./styles/reset.css";
 import "./styles/global.css";
+import "./styles/forms.css";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);

@@ -9,12 +9,14 @@ import service from "./../api/apiHandler";
 import axios from "axios";
 import UserContext from "../auth/UserContext";
 import Trackers from "./Trackers";
+import { getIntensityDescription } from "../helpers";
 
 const NewMigraine = () => {
   const navigate = useNavigate();
   const [trackersCategory, setTrackersCategory] = useState([]);
   const [trackers, setTrackers] = useState([]);
   const [trackersSubCategory, setTrackersSubCategory] = useState([]);
+  const [intensityDetails, setIntensityDetails] = useState(0);
 
   //! Delete later
   //   const [checkboxCategoryData, setCheckboxCategoryData, resetCheckboxCategory] =
@@ -46,7 +48,7 @@ const NewMigraine = () => {
   //Getting all trackers, categories and subcategories to display them on form
   useEffect(() => {
     service.get("/api/trackers").then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       setTrackersCategory(
         res.data.allTrackersCategory.map((t) => {
           return { name: t.name, status: false, _id: t._id };
@@ -96,9 +98,9 @@ const NewMigraine = () => {
       formData["selected_trackers"] = trackers
         .filter((tracker) => tracker.status)
         .map((tracker) => tracker._id);
-      console.log(formData);
+      // console.log(formData);
       const { data } = await service.post("/api/migraines", formData);
-      console.log("New migraine: ", data);
+      // console.log("New migraine: ", data);
 
       //navigate("/migraines/trackers");
     } catch (error) {
@@ -141,6 +143,11 @@ const NewMigraine = () => {
       })
     );
   };
+  const { title, description, icon } =
+    getIntensityDescription(intensityDetails);
+  useEffect(() => {
+    setIntensityDetails(intensity);
+  }, [intensity]);
 
   return (
     <div>
@@ -185,24 +192,32 @@ const NewMigraine = () => {
               setFormData({ ...formData, intensity: event.target.value })
             }
           />
+          <div className="intensity-description">
+            {intensity}
+            {title}
+            {description}
+            {icon}
+          </div>
         </div>
-        <div>
-          <label htmlFor="phases">Phases:</label>
+        <div className="phases">
+          <div>Phases:</div>
 
           {Object.keys(checkboxData).map((phase, index) => {
             return (
-              <>
-                <label htmlFor={phase}>{phase}: </label>
-                <input
-                  key={phase}
-                  type="checkbox"
-                  id={phase}
-                  name={phase}
-                  value={phase}
-                  onChange={setCheckboxData}
-                  checked={checkboxData[phase]}
-                />
-              </>
+              <div className="phase-checkbox">
+                <label htmlFor={phase}>
+                  <input
+                    key={phase}
+                    type="checkbox"
+                    id={phase}
+                    name={phase}
+                    value={phase}
+                    onChange={setCheckboxData}
+                    checked={checkboxData[phase]}
+                  />
+                  <span>{phase}</span>
+                </label>
+              </div>
             );
           })}
         </div>
@@ -280,20 +295,23 @@ const NewMigraine = () => {
                               )
                               .map((tracker) => {
                                 return (
-                                  <div key={tracker._id}>
+                                  <div
+                                    key={tracker._id}
+                                    className="tracker-checkbox"
+                                  >
                                     <label htmlFor={tracker.name}>
-                                      {tracker.name}
+                                      <input
+                                        type="checkbox"
+                                        id={tracker.name}
+                                        name={tracker.name}
+                                        value={tracker.name}
+                                        checked={tracker.status}
+                                        onChange={() =>
+                                          handleTracker(tracker._id)
+                                        }
+                                      />
+                                      <span>{tracker.name}</span>
                                     </label>
-                                    <input
-                                      type="checkbox"
-                                      id={tracker.name}
-                                      name={tracker.name}
-                                      value={tracker.name}
-                                      checked={tracker.status}
-                                      onChange={() =>
-                                        handleTracker(tracker._id)
-                                      }
-                                    />
                                   </div>
                                 );
                               })}
