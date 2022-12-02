@@ -9,9 +9,11 @@
 	--lilac: #D3CFFF;
 	--orange: #EF8354;
 	--white: #ffffff;
+	--light-grey: #D9D9D9;
 	--shadow-solid-orange: 4px 4px 0px var(--orange);
 	--shadow-solid-lilac: 4px 4px 0px var(--lilac);
 	--shadow-solid-mint: 4px 4px 0 var(--mint-green);
+	--shadow-solid-light-grey: 5px 5px 0px var(--light-grey);
 }
 
 * {
@@ -69,6 +71,20 @@ form button {
 	border: 1px solid var(--white);
 }
 
+.btn-orange-shadow-mint {
+	background: var(--orange);
+	border: 1px solid var(--darkest);
+	box-shadow: var(--shadow-solid-mint);
+	color: white;
+}
+
+.btn-grey-shadow-light-grey {
+	background: var(--dark-blue);
+	border: 1px solid var(--darkest);
+	box-shadow: var(--shadow-solid-light-grey);
+	color: white;
+}
+
 form,
 form>div {
 	display: flex;
@@ -104,6 +120,7 @@ form button {
 	border: 3px solid var(--darkest);
 	box-shadow: 7px 7px 0px #B9F7D2;
 }
+
 
 .progress-bar-container {
 	display: flex;
