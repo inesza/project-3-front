@@ -15,19 +15,35 @@ const NewMigraine = () => {
   const [trackersCategory, setTrackersCategory] = useState([]);
   const [trackers, setTrackers] = useState([]);
   const [trackersSubCategory, setTrackersSubCategory] = useState([]);
-  const [checkboxCategoryData, setCheckboxCategoryData, resetCheckboxCategory] =
-    useCheckbox({
-      Nutrition: false,
-      Activities: false,
-      Environment: false,
-      Health: false,
-    });
-  //   const [
-  //     checkboxSubCategoryData,
-  //     setCheckboxSubCategoryData,
-  //     resetCheckboxSubCategory,
-  //   ] = useCheckbox({ ...trackers });
 
+  //! Delete later
+  //   const [checkboxCategoryData, setCheckboxCategoryData, resetCheckboxCategory] =
+  //     useCheckbox({
+  //       Nutrition: false,
+  //       Activities: false,
+  //       Environment: false,
+  //       Health: false,
+  //     });
+  const rightNow = new Date().toISOString().split(".")[0].slice(0, -3);
+  const [startDate, setStartDate] = useState(rightNow);
+
+  // Handling the "phases" checkboxes values for the form
+  const [checkboxData, setCheckboxData, resetCheckbox] = useCheckbox({
+    Prodrome: false,
+    Postdrome: false,
+    Aura: false,
+    Headache: false,
+    "Other/Unsure": false,
+  });
+
+  const [formData, setFormData] = useState({
+    start_date: startDate,
+    end_date: "",
+    intensity: 0,
+    notes: "",
+  });
+
+  //Getting all trackers, categories and subcategories to display them on form
   useEffect(() => {
     service.get("/api/trackers").then((res) => {
       console.log(res.data);
@@ -58,27 +74,9 @@ const NewMigraine = () => {
       );
     });
   }, []);
-  console.log("===========", trackers);
 
   // Defining the today's date in UT for the start date of migraine crisis
-  const rightNow = new Date().toISOString().split(".")[0].slice(0, -3);
-  const [startDate, setStartDate] = useState(rightNow);
 
-  // Handling the "phases" checkboxes values for the form
-  const [checkboxData, setCheckboxData, resetCheckbox] = useCheckbox({
-    Prodrome: false,
-    Postdrome: false,
-    Aura: false,
-    Headache: false,
-    "Other/Unsure": false,
-  });
-
-  const [formData, setFormData] = useState({
-    start_date: startDate,
-    end_date: "",
-    intensity: 0,
-    notes: "",
-  });
   const { start_date, end_date, intensity, notes } = formData;
 
   const handleSubmit = async (event) => {
@@ -95,10 +93,14 @@ const NewMigraine = () => {
         }
       }
       formData["phases"] = phases;
+      formData["selected_trackers"] = trackers
+        .filter((tracker) => tracker.status)
+        .map((tracker) => tracker._id);
+      console.log(formData);
       const { data } = await service.post("/api/migraines", formData);
       console.log("New migraine: ", data);
 
-      navigate("/migraines/trackers");
+      //navigate("/migraines/trackers");
     } catch (error) {
       console.log(error);
     }
@@ -221,10 +223,12 @@ const NewMigraine = () => {
           {trackersCategory.map((trackerCategory) => {
             return (
               <div key={trackerCategory._id}>
-                <label htmlFor={trackerCategory.name}>
-                  {trackerCategory.name}
-                </label>
-                {/* <input
+                <h2>
+                  {" "}
+                  <label htmlFor={trackerCategory.name}>
+                    {trackerCategory.name}
+                  </label>
+                  {/* <input
                   type="checkbox"
                   id={trackerCategory.name}
                   name={trackerCategory.name}
@@ -232,14 +236,15 @@ const NewMigraine = () => {
                   onChange={setCheckboxCategoryData}
                   checked={checkboxCategoryData[trackerCategory.name]}
                 /> */}
-                <input
-                  type="checkbox"
-                  id={trackerCategory.name}
-                  name={trackerCategory.name}
-                  value={trackerCategory.name}
-                  onChange={() => handleCategory(trackerCategory._id)}
-                  checked={trackerCategory.status}
-                />
+                  <input
+                    type="checkbox"
+                    id={trackerCategory.name}
+                    name={trackerCategory.name}
+                    value={trackerCategory.name}
+                    onChange={() => handleCategory(trackerCategory._id)}
+                    checked={trackerCategory.status}
+                  />
+                </h2>
 
                 {trackerCategory.status &&
                   trackersSubCategory
@@ -251,19 +256,21 @@ const NewMigraine = () => {
                       return (
                         <div>
                           <div key={trackerSubCategory._id}>
-                            <label htmlFor={trackerSubCategory.name}>
-                              {trackerSubCategory.name}
-                            </label>
-                            <input
-                              type="checkbox"
-                              id={trackerSubCategory.name}
-                              name={trackerSubCategory.name}
-                              value={trackerSubCategory.name}
-                              checked={trackerSubCategory.status}
-                              onChange={() =>
-                                handleSubCategory(trackerSubCategory._id)
-                              }
-                            />
+                            <h3>
+                              <label htmlFor={trackerSubCategory.name}>
+                                {trackerSubCategory.name}
+                              </label>
+                              <input
+                                type="checkbox"
+                                id={trackerSubCategory.name}
+                                name={trackerSubCategory.name}
+                                value={trackerSubCategory.name}
+                                checked={trackerSubCategory.status}
+                                onChange={() =>
+                                  handleSubCategory(trackerSubCategory._id)
+                                }
+                              />
+                            </h3>
                           </div>
                           {trackerSubCategory.status &&
                             trackers
@@ -297,7 +304,7 @@ const NewMigraine = () => {
             );
           })}
         </ul>
-        {!trackersSubCategory.length !== 0 && (
+        {/* {!trackersSubCategory.length !== 0 && (
           <>
             <h2>Trackers Subcategory</h2>
             <ul>
@@ -318,8 +325,8 @@ const NewMigraine = () => {
               })}
             </ul>
           </>
-        )}
-        {!trackers.length !== 0 && (
+        )} */}
+        {/* {!trackers.length !== 0 && (
           <>
             <h2>Trackers</h2>
             <ul>
@@ -338,7 +345,7 @@ const NewMigraine = () => {
               })}
             </ul>
           </>
-        )}
+        )} */}
 
         <button>Add new migraine</button>
       </form>
