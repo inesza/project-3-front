@@ -2,10 +2,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiHandler from "../../api/apiHandler";
+import service from "../../api/apiHandler";
+import axios from "axios";
 import FormSignUpStep1 from "./FormSignUp/FormSignUpStep1";
 import FormSignUpStep2 from "./FormSignUp/FormSignUpStep2";
 
-const FormSignUp = () => {
+const FormSignUp = ({ edit }) => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [x, setX] = useState(0);
@@ -37,20 +39,32 @@ const FormSignUp = () => {
   ];
   const handleSubmit = (e) => {
     e.preventDefault();
-    apiHandler
-      .signup(formData)
-      .then(() => {
-        alert("Created");
-        // navigate("/signin");
-      })
-      .catch((error) => {
-        setError(error.response);
-      });
+    if (edit) {
+      service
+        .patch("/api/auth/edit", formData)
+        .then((res) => {
+          console.log(res.data);
+          navigate("/profile");
+          navigate(0);
+        })
+        .catch((e) => console.log(e));
+    } else {
+      apiHandler
+        .signup(formData)
+        .then(() => {
+          alert("Created");
+          navigate("/signin");
+        })
+        .catch((error) => {
+          setError(error.response);
+        });
+    }
   };
   return (
     <section>
       <section className="dark-bg-orange-shadow">
-        <h2>Sign up</h2>
+        {edit && <h2>Edit Profile</h2>}
+        {!edit && <h2>Sign up</h2>}
         <div
           className="progress-bar-container"
           style={{
