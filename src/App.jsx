@@ -8,6 +8,7 @@ import PrivateRoute from "./components/ProtectedRoute/PrivateRoute";
 import LoggedOut from "./components/LoggedOut/LoggedOut";
 import NewMigraine from "./pages/NewMigraine";
 import Trackers from "./pages/Trackers";
+import FormNewMigraineStep2 from "./components/Forms/FormNewMigraine/FormNewMigraineStep2";
 import MigraineJournalFull from "./components/Migraines/MigraineJournalFull";
 import MigraineSingle from "./components/Migraines/MigraineSingle";
 
@@ -29,7 +30,10 @@ function App() {
             <Route path="migraine/:id" element={<MigraineSingle />} />
           </Route>
           <Route path="/migraines" element={<NewMigraine />} />
-          <Route path="/migraines/trackers" element={<Trackers />} />
+          <Route
+            path="/migraines/trackers"
+            element={<FormNewMigraineStep2 />}
+          />
         </Route>
       </Routes>
     </div>
