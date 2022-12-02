@@ -14,9 +14,7 @@ const Profile = () => {
       setMigraines(data);
     });
   }, []);
-  if (!migraines.length) {
-    return <div className="loading">Loading...</div>;
-  }
+
   return (
     <section className="profile dark-bg-orange-shadow ">
       <div className="edit-profile">
@@ -27,10 +25,16 @@ const Profile = () => {
       <h1>Hello {currentUser.username}!</h1>
       <section className="migraine-journal">
         Migraine journal
-        {lastMigraines.map((migraine) => {
-          return <MigraineSummaryCard migraine={migraine} key={migraine._id} />;
-        })}
-        <Link to="/migraines">Older entries</Link>
+        {migraines.length !== 0 &&
+          lastMigraines.map((migraine) => {
+            return (
+              <>
+                <MigraineSummaryCard migraine={migraine} key={migraine._id} />
+                <Link to="/migraines">Older entries</Link>
+              </>
+            );
+          })}
+        {!migraines.length && <div>No Migraines to show</div>}
       </section>
       <section className="stats">Stats</section>
     </section>
