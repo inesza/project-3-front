@@ -7,7 +7,6 @@ const FormSignUpStep1 = ({ page, setPage, formData, setFormData, x, setX }) => {
       transition={{ duration: 1 }}
       animate={{ x: 0 }}
     >
-      <div>Sign Up</div>
       <input
         type="text"
         placeholder="Username"
@@ -26,14 +25,16 @@ const FormSignUpStep1 = ({ page, setPage, formData, setFormData, x, setX }) => {
         value={formData.password}
         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
       />
-      <button
-        onClick={() => {
-          setPage(page + 1);
-          setX(1000);
-        }}
-      >
-        Next
-      </button>
+      <div className="form-nav">
+        <button
+          onClick={() => {
+            setPage(page + 1);
+            setX(1000);
+          }}
+        >
+          Next
+        </button>
+      </div>
     </motion.div>
   );
 };

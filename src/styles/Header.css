@@ -1,0 +1,23 @@
+header {
+	display: flex;
+	justify-content: space-between;
+	background: var(--darkest);
+	position: fixed;
+	width: 100%;
+	padding: 1em;
+	top: 0;
+}
+
+nav.top-nav {
+	height: calc(100vh);
+	display: flex;
+	align-items: flex-end;
+	flex-direction: column;
+	background: var(--darkest);
+	padding: 1em 2em 1em 1em;
+	box-shadow: -5px 5px 10px rgba(211, 207, 255, 0.24);
+}
+
+header .logo img {
+	height: 2.5em;
+}
