@@ -12,6 +12,8 @@ import FormNewMigraineStep2 from "./components/Forms/FormNewMigraine/FormNewMigr
 import MigraineJournalFull from "./pages/MigraineJournalFull";
 import MigraineSingle from "./pages/MigraineSingle";
 import NewMigraineButton from "./components/Migraines/NewMigraineButton";
+import FormSignIn from "./components/Forms/FormSignIn";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   return (
@@ -28,6 +30,7 @@ function App() {
             {/* All routes after the PrivateRoute require the user to be loggedIn */}
             <Route path="/profile" element={<NewMigraineButton />}>
               <Route index element={<Profile />} />
+              <Route path="edit" element={<EditProfile />} />
             </Route>
             <Route path="/migraines">
               <Route index element={<MigraineJournalFull />} />

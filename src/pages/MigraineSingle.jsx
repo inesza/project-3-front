@@ -15,6 +15,7 @@ const MigraineSingle = () => {
     service
       .get(`/api/migraines/${id}`)
       .then((response) => {
+        console.log(response.data);
         setMigraine(response.data);
       })
       .catch((e) => {
@@ -58,7 +59,9 @@ const MigraineSingle = () => {
         {intensityDetails.title}, {intensityDetails.description}
       </div>
       <div>Phases :{migraine.phases?.map((phase) => phase)}</div>
-      <div>Trackers: {migraine.trackers?.map((tracker) => tracker)}</div>
+      <div>
+        Trackers: {migraine.selected_trackers?.map((tracker) => tracker.name)}
+      </div>
       <div>
         Treatments: {migraine.treatments?.map((treatment) => treatment)}
       </div>
