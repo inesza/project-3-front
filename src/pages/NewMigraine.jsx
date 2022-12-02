@@ -237,17 +237,20 @@ const NewMigraine = () => {
           {checkboxData.map((phase, index) => {
             return (
               <div key={phase.value} className="phase-checkbox">
-                <label htmlFor={phase.value}>
-                  <input
-                    type="checkbox"
-                    id={phase.value}
-                    name={phase.value}
-                    value={phase.value}
-                    onChange={() => handlePhases(phase.value)}
-                    checked={phase.status}
-                  />
-                  <span>{phase.value}</span>
-                </label>
+                <div>
+                  <label htmlFor={phase.value}>
+                    <input
+                      type="checkbox"
+                      id={phase.value}
+                      name={phase.value}
+                      value={phase.value}
+                      onChange={() => handlePhases(phase.value)}
+                      checked={phase.status}
+                    />
+                    <img src={phase.img} alt="" />
+                  </label>
+                </div>
+                <span>{phase.value}</span>
               </div>
             );
           })}
