@@ -30,7 +30,7 @@ const Profile = () => {
         {lastMigraines.map((migraine) => {
           return <MigraineSummaryCard migraine={migraine} key={migraine._id} />;
         })}
-        <Link to="/profile/migraine-journal">Older entries</Link>
+        <Link to="/migraines">Older entries</Link>
       </section>
       <section className="stats">Stats</section>
     </section>

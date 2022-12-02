@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import service from "../../api/ApiHandler";
-import MigraineSummaryCard from "./MigraineSummaryCard";
+import service from "../api/ApiHandler";
+import MigraineSummaryCard from "../components/Migraines/MigraineSummaryCard";
 
 const MigraineJournalFull = () => {
   const [migraines, setMigraines] = useState([]);

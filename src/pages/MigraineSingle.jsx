@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import service from "../../api/ApiHandler";
-import { getDuration, getIntensityDescription } from "../../helpers";
+import service from "../api/ApiHandler";
+import { getDuration, getIntensityDescription } from "../helpers";
 
 const MigraineSingle = () => {
   const [migraine, setMigraine] = useState(null);

@@ -9,8 +9,8 @@ import LoggedOut from "./components/LoggedOut/LoggedOut";
 import NewMigraine from "./pages/NewMigraine";
 import Trackers from "./pages/Trackers";
 import FormNewMigraineStep2 from "./components/Forms/FormNewMigraine/FormNewMigraineStep2";
-import MigraineJournalFull from "./components/Migraines/MigraineJournalFull";
-import MigraineSingle from "./components/Migraines/MigraineSingle";
+import MigraineJournalFull from "./pages/MigraineJournalFull";
+import MigraineSingle from "./pages/MigraineSingle";
 import NewMigraineButton from "./components/Migraines/NewMigraineButton";
 
 function App() {
@@ -31,9 +31,9 @@ function App() {
             </Route>
             <Route path="/migraines">
               <Route index element={<MigraineJournalFull />} />
-              <Route path="/:id" element={<MigraineSingle />} />
-              <Route path="/create" element={<NewMigraine />} />
-              <Route path="/trackers" element={<FormNewMigraineStep2 />} />
+              <Route path=":id" element={<MigraineSingle />} />
+              <Route path="create" element={<NewMigraine />} />
+              <Route path="trackers" element={<FormNewMigraineStep2 />} />
             </Route>
           </Route>
         </Routes>
