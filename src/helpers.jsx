@@ -20,7 +20,7 @@ const getIntensityDescription = (intensity) => {
   let intensityTitle = "";
   let intensityDescription = "";
 
-  switch (intensity) {
+  switch (Number(intensity)) {
     case 0:
       intensityTitle = "Pain free";
       intensityDescription = "No pain at all";

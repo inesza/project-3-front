@@ -85,42 +85,6 @@ form button {
 	color: white;
 }
 
-form,
-form>div {
-	display: flex;
-	flex-direction: column;
-	width: 90%;
-	max-width: 400px;
-	margin: 0 auto;
-	gap: 1em;
-}
-
-form input,
-form textarea,
-form select {
-	background: white;
-	border: none;
-	border-radius: 0;
-	box-shadow: var(--shadow-solid-lilac);
-	padding: .5em;
-}
-
-form input:focus,
-form textarea:focus,
-form select:focus {
-	border: none;
-	outline: none;
-	box-shadow: var(--shadow-solid-mint);
-}
-
-form button {
-	margin: 1em;
-	background: var(--orange);
-	color: white;
-	border: 3px solid var(--darkest);
-	box-shadow: 7px 7px 0px #B9F7D2;
-}
-
 
 .progress-bar-container {
 	display: flex;
