@@ -6,7 +6,7 @@ import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import PrivateRoute from "./components/ProtectedRoute/PrivateRoute";
 import LoggedOut from "./components/LoggedOut/LoggedOut";
-import NewMigraine from "./pages/NewMigraine";
+import NewMigraine from "./pages/NewMigraineOLDVERSION";
 import Trackers from "./pages/Trackers";
 import FormNewMigraineStep2 from "./components/Forms/FormNewMigraine/FormNewMigraineStep2";
 import MigraineJournalFull from "./pages/MigraineJournalFull";
@@ -14,6 +14,7 @@ import MigraineSingle from "./pages/MigraineSingle";
 import NewMigraineButton from "./components/Migraines/NewMigraineButton";
 import FormSignIn from "./components/Forms/FormSignIn";
 import EditProfile from "./pages/EditProfile";
+import NewMigraineRefactor from "./pages/NewMigraineRefactor";
 
 function App() {
   return (
@@ -35,8 +36,7 @@ function App() {
             <Route path="/migraines" element={<NewMigraineButton />}>
               <Route index element={<MigraineJournalFull />} />
               <Route path=":id" element={<MigraineSingle />} />
-              <Route path="create" element={<NewMigraine />} />
-              <Route path="trackers" element={<FormNewMigraineStep2 />} />
+              <Route path="create" element={<NewMigraineRefactor />} />
             </Route>
           </Route>
         </Routes>
