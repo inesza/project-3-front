@@ -1,6 +1,10 @@
 import FormSignUp from "../components/Forms/FormSignUp";
 const Signup = () => {
-	return <FormSignUp />;
+  return (
+    <section className="signup">
+      <FormSignUp />
+    </section>
+  );
 };
 
 export default Signup;

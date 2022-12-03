@@ -36,6 +36,10 @@ ul {
 	list-style-type: none;
 }
 
+svg {
+	pointer-events: none;
+}
+
 body {
 	width: 100%;
 	min-height: 100vh;
@@ -51,12 +55,16 @@ h2 {
 	text-align: center;
 }
 
+h2 {
+	font-size: 2em;
+}
+
 main {
 	margin-top: 70px;
 }
 
-main> :first-child {
-	padding: 1em;
+main>:first-child {
+	padding-top: 2em !important;
 }
 
 .btn,

@@ -7,6 +7,7 @@
     text-align: center;
     color: var(--dark-blue);
     text-transform: uppercase;
+    font-weight: 500;
 }
 
 .profile h1 {
@@ -19,4 +20,8 @@
 .profile .edit-profile {
     text-align: right;
     margin-bottom: 1em;
+}
+
+main>:first-child {
+    padding-bottom: 3em !important;
 }
