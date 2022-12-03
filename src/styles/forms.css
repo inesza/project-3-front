@@ -2,13 +2,23 @@ form,
 form>div {
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 100%;
+    padding: 2em;
     max-width: 400px;
     margin: 0 auto;
     gap: 1em;
 }
 
+.signup form,
+.signin form {
+    background: var(--darkest);
+    box-shadow: var(--shadow-solid-orange);
+    border-radius: 10px;
+}
+
 form input[type="text"],
+form input[type="email"],
+form input[type="password"],
 form input[type="date"],
 form input[type="datetime-local"],
 form textarea,
@@ -21,6 +31,8 @@ form select {
 }
 
 form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus,
 form input[type="date"]:focus,
 form input[type="datetime-local"]:focus,
 form textarea:focus,

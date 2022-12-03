@@ -6,7 +6,7 @@ const NewMigraineButton = () => {
     <>
       <Outlet />
       <Link to="/migraines/create" className="profile-new-migraine-button">
-        New Migraine
+        New Migraine entry
       </Link>
     </>
   );

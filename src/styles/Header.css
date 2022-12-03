@@ -6,6 +6,7 @@ header {
 	width: 100%;
 	padding: 1em;
 	top: 0;
+	z-index: 1000;
 }
 
 nav.top-nav {
@@ -14,8 +15,14 @@ nav.top-nav {
 	align-items: flex-end;
 	flex-direction: column;
 	background: var(--darkest);
-	padding: 1em 2em 1em 1em;
+	gap: 5%;
+	padding: 4em 2em 1em 1em;
 	box-shadow: -5px 5px 10px rgba(211, 207, 255, 0.24);
+}
+
+nav.top-nav span {
+	font-size: 1.8em;
+	text-align: right;
 }
 
 header .logo img {

@@ -1,12 +1,46 @@
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
-import { motion, useCycle, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import useAuth from "../../auth/useAuth";
 import "../../styles/Header.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightFromBracket, faBars } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
-  const [open, cycleOpen] = useCycle(false, true);
+  const [open, cycleOpen] = useState(false);
   const { isLoggedIn, currentUser, removeUser } = useAuth();
+  const itemVariants = {
+    closed: { opacity: 0 },
+    open: { opacity: 1 },
+  };
+  const sideVariants = {
+    closed: {
+      transition: {
+        staggerChildren: 0.1,
+        staggerDirection: -1,
+      },
+    },
+    open: {
+      transition: {
+        staggerChildren: 0.1,
+        staggerDirection: 1,
+      },
+    },
+  };
+
+  const closeMenu = (event) => {
+    if (event.target !== document.getElementById("burger-menu-container")) {
+      cycleOpen(false);
+    }
+  };
+  useEffect(() => {
+    if (open === true) {
+      document.addEventListener("click", closeMenu);
+    }
+    return () => {
+      document.removeEventListener("click", closeMenu);
+    };
+  }, [open]);
 
   return (
     <>
@@ -14,29 +48,57 @@ const Header = () => {
         <NavLink className="logo" to="/">
           <img src="/images/logo.svg" alt="" />
         </NavLink>
-        <button onClick={cycleOpen}>Burger</button>
+        <span id="burger-menu-container" onClick={() => cycleOpen(!open)}>
+          <FontAwesomeIcon
+            icon={faBars}
+            style={{ fontSize: "2em" }}
+            id="burger-menu"
+          />
+        </span>
       </header>
       <AnimatePresence>
         {open && (
           <motion.div
             initial={{ width: 0 }}
-            transition={{ duration: 1 }}
-            animate={{ width: "30%", position: "absolute", top: 0, right: 0 }}
-            exit={{ width: 0, transition: { duration: 0.5 } }}
+            animate={{ width: 250, position: "absolute", top: 0, right: 0 }}
+            exit={{ width: 0, transition: { delay: 0.5 } }}
           >
-            <motion.nav className="top-nav">
+            <motion.nav
+              className="top-nav"
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={sideVariants}
+            >
               {isLoggedIn && (
                 <>
-                  <NavLink to="/profile">
-                    {currentUser && currentUser.username}
-                  </NavLink>
-                  <button onClick={removeUser}>Log-Out</button>
+                  <motion.span variants={itemVariants}>
+                    <NavLink to="/profile">My profile</NavLink>
+                  </motion.span>
+                  <motion.span variants={itemVariants}>
+                    <NavLink to="/migraines">Migraines journal</NavLink>
+                  </motion.span>
+                  <motion.span variants={itemVariants}>
+                    <NavLink to="/">My stats</NavLink>
+                  </motion.span>
+
+                  <motion.span onClick={removeUser} variants={itemVariants}>
+                    Log out{" "}
+                    <FontAwesomeIcon
+                      icon={faRightFromBracket}
+                      style={{ marginLeft: "10px" }}
+                    />
+                  </motion.span>
                 </>
               )}
               {!isLoggedIn && (
                 <>
-                  <NavLink to="/signin">Log in</NavLink>
-                  <NavLink to="/signup">Sign Up</NavLink>
+                  <motion.span variants={itemVariants}>
+                    <NavLink to="/signin">Log in</NavLink>
+                  </motion.span>
+                  <motion.span variants={itemVariants}>
+                    <NavLink to="/signup">Sign Up</NavLink>
+                  </motion.span>
                 </>
               )}
             </motion.nav>
