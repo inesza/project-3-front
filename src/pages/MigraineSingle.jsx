@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import service from "../api/ApiHandler";
 import { getDuration, getIntensityDescription } from "../helpers";
 import ModalConfirmDelete from "../components/ModalConfirmDelete";
@@ -45,7 +45,9 @@ const MigraineSingle = () => {
   return (
     <section>
       <div className="buttons">
-        <button>Edit</button>
+        <button>
+          <Link to={`/migraines/edit/${migraine._id}`}>Edit</Link>
+        </button>
         <button onClick={toggleModal}>Delete</button>
       </div>
       <div>
