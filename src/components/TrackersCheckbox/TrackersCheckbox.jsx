@@ -4,6 +4,7 @@ const TrackersCheckbox = ({
   trackersCategory,
   trackersSubCategory,
   trackers,
+  checkedTrackers,
   handleTrack,
   setTrackersCategory,
   setTrackersSubCategory,
