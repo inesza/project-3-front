@@ -11,6 +11,7 @@ const Profile = () => {
   const lastMigraines = migraines.slice(0, 2);
   useEffect(() => {
     service.getAllMigraines().then((data) => {
+      console.log(data);
       setMigraines(data);
     });
   }, []);
@@ -34,7 +35,7 @@ const Profile = () => {
               </>
             );
           })}
-        {!migraines.length && <div>No Migraines to show</div>}
+        {migraines.length === 0 && <div>No Migraines to show</div>}
       </section>
       <section className="stats">Stats</section>
     </section>

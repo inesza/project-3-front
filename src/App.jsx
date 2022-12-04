@@ -15,6 +15,7 @@ import NewMigraineButton from "./components/Migraines/NewMigraineButton";
 import FormSignIn from "./components/Forms/FormSignIn";
 import EditProfile from "./pages/EditProfile";
 import NewMigraineRefactor from "./pages/NewMigraineRefactor";
+import EditMigraine from "./pages/EditMigraine";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="/migraines" element={<NewMigraineButton />}>
               <Route index element={<MigraineJournalFull />} />
               <Route path=":id" element={<MigraineSingle />} />
+              <Route path="edit/:id" element={<EditMigraine />} />
               <Route path="create" element={<NewMigraineRefactor />} />
             </Route>
           </Route>
