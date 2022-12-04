@@ -25,3 +25,7 @@
 main>:first-child {
     padding-bottom: 3em !important;
 }
+
+.new-migraine-container {
+    padding: 1em;
+}

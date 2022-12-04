@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import apiHandler from "../api/apiHandler";
 import service from "../api/apiHandler";
 import { getIntensityDescription } from "../helpers";
-import DateInput from "../components/dateInput/dateInput";
+import DateInputStart from "../components/DateInput/DateInputStart";
+import DateInputEnd from "../components/DateInput/DateInputEnd";
 import IntensityInput from "../components/IntensityInput/IntensityInput";
 import PhasesCheckbox from "../components/PhasesCheckbox/PhasesCheckbox";
 import Notes from "../components/Notes/Notes";
@@ -60,7 +61,6 @@ const NewMigraine = () => {
   //Getting all trackers, categories and subcategories to display them on form
   useEffect(() => {
     service.get("/api/trackers").then((res) => {
-      // console.log(res.data);
       setTrackersCategory(
         res.data.allTrackersCategory.map((t) => {
           return { name: t.name, status: false, _id: t._id };
@@ -146,57 +146,88 @@ const NewMigraine = () => {
   };
 
   return (
-    <div>
-      <h2>Add new migraine</h2>
-      <form onSubmit={handleSubmit}>
-        <DateInput
-          name="start-date"
-          id="start-date"
-          value={start_date}
-          handleDate={handleDate}
-        />
+    <section className="new-migraine-container">
+      <div>
+        <h2>Add new migraine</h2>
 
-        <DateInput
-          name="end-date"
-          id="end-date"
-          value={end_date}
-          min={start_date}
-          handleDate={handleDate}
-        />
+        <form onSubmit={handleSubmit} className="new-migraine-form">
+          <DateInputStart
+            name="start-date"
+            id="start-date"
+            value={start_date}
+            handleDate={handleDate}
+          />
 
-        <IntensityInput
-          name="intensity"
-          min="0"
-          max="10"
-          value={intensity}
-          intensity={intensity}
-          title={title}
-          description={description}
-          icon={icon}
-          handleFormData={handleFormData}
-        />
+          <DateInputEnd
+            name="end-date"
+            id="end-date"
+            value={end_date}
+            min={start_date}
+            handleDate={handleDate}
+          />
 
-        <PhasesCheckbox
-          checkboxData={checkboxData}
-          setCheckboxData={setCheckboxData}
-          handleTrack={handleTrack}
-        />
+          {/* <section className="migraine-over-selector">
+            <h3 className="w-100">Is it over yet?</h3>
+            <span
+              className="btn btn-select"
+              style={{ background: bgColorTrue, transition: ".5s" }}
+              onClick={() => handleFinishState(true)}
+            >
+              Yes
+            </span>
+            <span
+              className="btn btn-select"
+              style={{ background: bgColorFalse, transition: ".5s" }}
+              onClick={() => handleFinishState(false)}
+            >
+              No
+            </span>
 
-        <Notes name="notes" value={notes} handleFormData={handleFormData} />
+            {finished && (
+              <DateInput
+                name="end-date"
+                id="end-date"
+                value={end_date}
+                min={start_date}
+                handleDate={handleDate}
+              />
+            )}
+          </section> */}
 
-        <TrackersCheckbox
-          trackersCategory={trackersCategory}
-          trackersSubCategory={trackersSubCategory}
-          trackers={trackers}
-          handleTrack={handleTrack}
-          setTrackersCategory={setTrackersCategory}
-          setTrackersSubCategory={setTrackersSubCategory}
-          setTrackers={setTrackers}
-        />
+          <IntensityInput
+            name="intensity"
+            min="0"
+            max="10"
+            value={intensity}
+            intensity={intensity}
+            title={title}
+            description={description}
+            icon={icon}
+            handleFormData={handleFormData}
+          />
 
-        <button>Add new migraine</button>
-      </form>
-    </div>
+          <PhasesCheckbox
+            checkboxData={checkboxData}
+            setCheckboxData={setCheckboxData}
+            handleTrack={handleTrack}
+          />
+
+          <Notes name="notes" value={notes} handleFormData={handleFormData} />
+
+          <TrackersCheckbox
+            trackersCategory={trackersCategory}
+            trackersSubCategory={trackersSubCategory}
+            trackers={trackers}
+            handleTrack={handleTrack}
+            setTrackersCategory={setTrackersCategory}
+            setTrackersSubCategory={setTrackersSubCategory}
+            setTrackers={setTrackers}
+          />
+
+          <button>Save migraine entry</button>
+        </form>
+      </div>
+    </section>
   );
 };
 

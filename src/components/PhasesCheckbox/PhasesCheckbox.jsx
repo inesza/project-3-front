@@ -2,8 +2,8 @@ import React from "react";
 
 const PhasesCheckbox = ({ checkboxData, handleTrack, setCheckboxData }) => {
   return (
-    <div className="phases">
-      <div>Phases:</div>
+    <section className="phases">
+      <h3 className="w-100">What were the symptoms?</h3>
 
       {checkboxData.map((phase) => {
         return (
@@ -27,7 +27,7 @@ const PhasesCheckbox = ({ checkboxData, handleTrack, setCheckboxData }) => {
           </div>
         );
       })}
-    </div>
+    </section>
   );
 };
 

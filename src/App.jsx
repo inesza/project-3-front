@@ -36,8 +36,8 @@ function App() {
             <Route path="/migraines" element={<NewMigraineButton />}>
               <Route index element={<MigraineJournalFull />} />
               <Route path=":id" element={<MigraineSingle />} />
-              <Route path="create" element={<NewMigraineRefactor />} />
             </Route>
+            <Route path="/migraines/create" element={<NewMigraineRefactor />} />
           </Route>
         </Routes>
       </main>
