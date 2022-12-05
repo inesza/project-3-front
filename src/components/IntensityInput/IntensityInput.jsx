@@ -12,9 +12,8 @@ const IntensityInput = ({
   handleFormData,
 }) => {
   return (
-    <div>
-      {" "}
-      <label htmlFor="intensity">Intensity:</label>
+    <section>
+      <h3 className="w-100">How bad was it ?</h3>
       <input
         type="range"
         name={name}
@@ -25,12 +24,13 @@ const IntensityInput = ({
         onChange={(event) => handleFormData(event)}
       />
       <div className="intensity-description">
-        {intensity}
-        {title}
-        {description}
-        {icon}
+        <div className="intensity-header">
+          <span>{title}</span>
+          <span>{intensity}/10</span>
+        </div>
+        <p>{description}</p>
       </div>
-    </div>
+    </section>
   );
 };
 

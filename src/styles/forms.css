@@ -1,19 +1,25 @@
-form,
-form>div {
+form {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 2em;
+    padding: 1em;
     max-width: 400px;
     margin: 0 auto;
     gap: 1em;
 }
 
+form>* {
+    padding: 1em;
+}
+
 .signup form,
-.signin form {
+.signin form,
+.new-migraine-container>div:first-child {
     background: var(--darkest);
     box-shadow: var(--shadow-solid-orange);
     border-radius: 10px;
+    padding-top: 2em;
+    padding-bottom: 2em;
 }
 
 form input[type="text"],
@@ -28,6 +34,7 @@ form select {
     border-radius: 0;
     box-shadow: var(--shadow-solid-lilac);
     padding: .5em;
+    width: 100%;
 }
 
 form input[type="text"]:focus,
@@ -40,6 +47,41 @@ form select:focus {
     border: none;
     outline: none;
     box-shadow: var(--shadow-solid-mint);
+}
+
+.new-migraine-form {
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+.new-migraine-form>section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    width: 100%;
+}
+
+.new-migraine-form :not(.phases) div {
+    width: 100%;
+}
+
+.new-migraine-form h3 {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+.btn-select {
+    background: transparent;
+    border: 2px solid white;
+}
+
+.new-migraine-form .migraine-over-selector {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 form button {
@@ -116,57 +158,83 @@ input[type=range]::-webkit-slider-runnable-track {
 
 }
 
-/* Phases checkboxes */
-.phases {
+/* Phases & trackers categories checkboxes */
+
+.new-migraine-form .trackers {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.new-migraine-form .phases {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     row-gap: 2em;
+    column-gap: 1em;
+    padding: 0;
+
 }
 
 .phases div:first-child {
     width: 100%;
 }
 
-.phase-checkbox {
+.phase-checkbox,
+.tracker-category-checkbox {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1em;
-    /* width: 40%; */
 }
 
-/* .phase-checkbox>div {
-    background-color: var(--dark-blue);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    border: 2px solid white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* .tracker-category-checkbox {
+    width: 50%;
 } */
 
-.phase-checkbox label img {
+.phase-checkbox label img,
+.trackers label img {
     text-align: center;
     display: block;
     background-color: var(--dark-blue);
     aspect-ratio: 1;
     border-radius: 50%;
     border: 2px solid white;
-    width: 120px;
-    padding: 1.5em;
+    width: 90px;
+    padding: 1em;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: .5s;
 }
 
-.phase-checkbox label input {
+.phase-checkbox label input,
+.trackers label input {
     display: none;
 }
 
-.phase-checkbox input:checked+img {
+.phase-checkbox input:checked+img,
+.trackers input:checked+img {
     background-color: var(--lilac);
     color: #fff;
+}
+
+/* Intensity */
+.intensity-description {
+    border: 1px solid white;
+    width: 100%;
+    margin: 2em auto;
+    padding: 1em;
+    min-height: 190px;
+}
+
+.intensity-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    font-size: 1.5em;
+    margin-bottom: 1em;
 }
