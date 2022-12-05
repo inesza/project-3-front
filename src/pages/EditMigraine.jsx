@@ -5,131 +5,137 @@ import apiHandler from "../api/apiHandler";
 import service from "../api/apiHandler";
 import axios from "axios";
 import { getIntensityDescription } from "../helpers";
-import DateInput from "../components/DateInput/DateInput";
 import IntensityInput from "../components/IntensityInput/IntensityInput";
 import PhasesCheckbox from "../components/PhasesCheckbox/PhasesCheckbox";
 import Notes from "../components/Notes/Notes";
 import TrackersCheckbox from "../components/TrackersCheckbox/TrackersCheckbox";
+import DateInputStart from "../components/DateInput/DateInputStart";
+import DateInputEnd from "../components/DateInput/DateInputEnd";
 
 const EditMigraine = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [migraine, setMigraine] = useState();
-  const [trackersCategory, setTrackersCategory] = useState([]);
-  const [trackers, setTrackers] = useState([]);
-  const [trackersSubCategory, setTrackersSubCategory] = useState([]);
-  const [intensityDetails, setIntensityDetails] = useState(0);
-  const [formData, setFormData] = useState({
-    migraine,
+  const [migraine, setMigraine] = useState({
+    migraineData: null,
+    trackersCategory: [],
+    trackersSubCategory: [],
+    trackers: [],
+    formData: {},
+    checkboxData: [
+      {
+        value: "Prodrome",
+        status: false,
+        img: "/images/formImages/prodrome.svg",
+      },
+      {
+        value: "Postdrome",
+        status: false,
+        img: "/images/formImages/postdrome.svg",
+      },
+      {
+        value: "Aura",
+        status: false,
+        img: "/images/formImages/aura.svg",
+      },
+
+      {
+        value: "Headache",
+        status: false,
+        img: "/images/formImages/headache.svg",
+      },
+      {
+        value: "Other/Unsure",
+        status: false,
+        img: "/images/formImages/other.svg",
+      },
+    ],
   });
 
-  const [checkboxData, setCheckboxData] = useState([
-    {
-      value: "Prodrome",
-      status: false,
-      img: "/images/formImages/prodrome.svg",
-    },
-    {
-      value: "Postdrome",
-      status: false,
-      img: "/images/formImages/postdrome.svg",
-    },
-    {
-      value: "Aura",
-      status: false,
-      img: "/images/formImages/aura.svg",
-    },
+  // console.log(migraine);
+  const {
+    migraineData,
+    trackersCategory,
+    trackersSubCategory,
+    trackers,
+    formData,
+    checkboxData,
+  } = migraine;
 
-    {
-      value: "Headache",
-      status: false,
-      img: "/images/formImages/headache.svg",
-    },
-    {
-      value: "Other/Unsure",
-      status: false,
-      img: "/images/formImages/other.svg",
-    },
-  ]);
   const { start_date, end_date, intensity, notes } = formData;
 
   useEffect(() => {
+    let formData;
+    let migraineData;
+    let updatedTrackers = [];
+
     service
       .get(`/api/migraines/${id}`)
       .then((res) => {
         const startDate = res.data.start_date.split(".")[0].slice(0, -3);
         const endDate = res.data.end_date.split(".")[0].slice(0, -3);
-        setFormData({
+
+        const selectedPhases = res.data.phases.map((phase) => phase.name);
+        const phases = [];
+
+        res.data.phases.forEach((phase) => {
+          phases.push({
+            value: phase.value,
+            status: selectedPhases.includes(phase.value),
+            img: phase.img,
+          });
+        });
+        console.log(phases);
+
+        formData = {
           _id: res.data._id,
           start_date: startDate,
           end_date: endDate,
           intensity: res.data.intensity,
-          phases: res.data.phases,
+          phases: phases,
           user: res.data.user,
           selected_trackers: res.data.selected_trackers,
           notes: res.data.notes,
-        });
-        setMigraine(res.data);
+        };
+        migraineData = res.data;
+
+        return service.get("/api/trackers");
       })
-      .catch((e) => console.log(e));
-  }, []);
+      .then((res) => {
+        const selectedTrackers = migraineData.selected_trackers.map(
+          (t) => t.name
+        );
 
-  useEffect(() => {
-    service.get("/api/trackers").then((res) => {
-      setTrackersCategory(
-        res.data.allTrackersCategory.map((t) => {
-          return { name: t.name, status: false, _id: t._id };
-        })
-      );
-
-      setTrackersSubCategory(
-        res.data.allTrackersSubCategory.map((t) => {
-          return {
+        res.data.allTrackers.forEach((t) => {
+          updatedTrackers.push({
             name: t.name,
-            status: false,
+            status: selectedTrackers.includes(t.name),
             _id: t._id,
-            category: t.category,
-          };
-        })
-      );
+            subcategory: t.subcategory,
+          });
+        });
 
-      const updatedTrackers = [];
-
-      if (migraine?.selected_trackers.length !== 0) {
-        res.data.allTrackers.map((t) => {
-          migraine?.selected_trackers.map((tracker) => {
-            if (tracker.name === t.name) {
-              updatedTrackers.push({
-                name: t.name,
-                status: true,
-                _id: t._id,
-                subcategory: t.subcategory,
-              });
-            } else {
-              updatedTrackers.push({
+        setMigraine((currentValue) => {
+          return {
+            ...currentValue,
+            migraineData,
+            formData,
+            trackersCategory: res.data.allTrackersCategory.map((t) => {
+              return { name: t.name, status: false, _id: t._id };
+            }),
+            trackersSubCategory: res.data.allTrackersSubCategory.map((t) => {
+              return {
                 name: t.name,
                 status: false,
                 _id: t._id,
-                subcategory: t.subcategory,
-              });
-            }
-          });
+                category: t.category,
+              };
+            }),
+            trackers: updatedTrackers,
+          };
         });
-        setTrackers(updatedTrackers);
-      } else if (migraine?.selected_trackers.length === 0) {
-        setTrackers(
-          res.data.allTrackers.map((t) => {
-            return {
-              name: t.name,
-              status: false,
-              _id: t._id,
-              subcategory: t.subcategory,
-            };
-          })
-        );
-      }
-    });
-  }, [migraine]);
+      })
+      .catch((e) => console.log(e));
+  }, []);
 
   const handleSubmit = async (event) => {
     try {
@@ -144,7 +150,7 @@ const EditMigraine = () => {
       formData["selected_trackers"] = trackers
         .filter((tracker) => tracker.status)
         .map((tracker) => tracker._id);
-      console.log(formData);
+      // console.log(formData);
       const { data } = await service.put(`/api/migraines/${id}`, formData);
       navigate("/profile");
     } catch (error) {
@@ -163,29 +169,37 @@ const EditMigraine = () => {
     );
   };
 
-  const { title, description, icon } =
-    getIntensityDescription(intensityDetails);
-  useEffect(() => {
-    setIntensityDetails(intensity);
-  }, [intensity]);
+  const { title, description, icon } = getIntensityDescription(intensity);
 
   const handleDate = (event) => {
     if (event.target.name === "start-date") {
-      setFormData({ ...formData, start_date: event.target.value });
+      setMigraine({
+        ...migraine,
+        formData: { ...formData, start_date: event.target.value },
+      });
     } else if (event.target.name === "end-date") {
-      setFormData({ ...formData, end_date: event.target.value });
+      setMigraine({
+        ...migraine,
+        formData: { ...formData, end_date: event.target.value },
+      });
     }
   };
 
   const handleFormData = (event) => {
     if (event.target.name === "intensity") {
-      setFormData({ ...formData, intensity: event.target.value });
+      setMigraine({
+        ...migraine,
+        formData: { ...formData, intensity: event.target.value },
+      });
     } else if (event.target.name === "notes") {
-      setFormData({ ...formData, notes: event.target.value });
+      setMigraine({
+        ...migraine,
+        formData: { ...formData, notes: event.target.value },
+      });
     }
   };
 
-  if (!migraine) {
+  if (!migraineData) {
     return <div>Loading...</div>;
   }
   return (
@@ -193,24 +207,24 @@ const EditMigraine = () => {
       <form onSubmit={handleSubmit}>
         <h2>Edit Migraine</h2>
 
-        <DateInput
+        <DateInputStart
           name="start-date"
           id="start-date"
           value={start_date}
           handleDate={handleDate}
         />
-        <DateInput
+        <DateInputEnd
           name="end-date"
           id="end-date"
           value={end_date}
-          min={migraine.start_date}
+          min={migraineData.start_date}
           handleDate={handleDate}
         />
         <IntensityInput
           name="intensity"
           min="0"
           max="10"
-          value={migraine.intensity}
+          value={migraineData.intensity}
           intensity={intensity}
           title={title}
           description={description}
@@ -219,7 +233,9 @@ const EditMigraine = () => {
         />
         <PhasesCheckbox
           checkboxData={checkboxData}
-          setCheckboxData={setCheckboxData}
+          setCheckboxData={(newValue) => {
+            setMigraine({ ...migraine, checkboxData: newValue });
+          }}
           handleTrack={handleTrack}
         />
         <Notes name="notes" value={notes} handleFormData={handleFormData} />
@@ -228,9 +244,15 @@ const EditMigraine = () => {
           trackersSubCategory={trackersSubCategory}
           trackers={trackers}
           handleTrack={handleTrack}
-          setTrackersCategory={setTrackersCategory}
-          setTrackersSubCategory={setTrackersSubCategory}
-          setTrackers={setTrackers}
+          setTrackersCategory={(newValue) => {
+            setMigraine({ ...migraine, trackersCategory: newValue });
+          }}
+          setTrackersSubCategory={(newValue) => {
+            setMigraine({ ...migraine, trackersSubCategory: newValue });
+          }}
+          setTrackers={(newValue) => {
+            setMigraine({ ...migraine, trackers: newValue });
+          }}
         />
         <button>Edit migraine</button>
       </form>
