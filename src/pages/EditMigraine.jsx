@@ -5,7 +5,7 @@ import apiHandler from "../api/apiHandler";
 import service from "../api/apiHandler";
 import axios from "axios";
 import { getIntensityDescription } from "../helpers";
-import DateInput from "../components/dateInput/dateInput";
+import DateInput from "../components/DateInput/DateInput";
 import IntensityInput from "../components/IntensityInput/IntensityInput";
 import PhasesCheckbox from "../components/PhasesCheckbox/PhasesCheckbox";
 import Notes from "../components/Notes/Notes";
@@ -14,7 +14,7 @@ import TrackersCheckbox from "../components/TrackersCheckbox/TrackersCheckbox";
 const EditMigraine = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [migraine, setMigraine] = useState(null);
+  const [migraine, setMigraine] = useState();
   const [trackersCategory, setTrackersCategory] = useState([]);
   const [trackers, setTrackers] = useState([]);
   const [trackersSubCategory, setTrackersSubCategory] = useState([]);
@@ -75,13 +75,13 @@ const EditMigraine = () => {
   }, []);
 
   useEffect(() => {
-    console.log(migraine);
     service.get("/api/trackers").then((res) => {
       setTrackersCategory(
         res.data.allTrackersCategory.map((t) => {
           return { name: t.name, status: false, _id: t._id };
         })
       );
+
       setTrackersSubCategory(
         res.data.allTrackersSubCategory.map((t) => {
           return {
@@ -94,27 +94,40 @@ const EditMigraine = () => {
       );
 
       const updatedTrackers = [];
-      res.data.allTrackers.map((t) => {
-        migraine?.selected_trackers.map((tracker) => {
-          if (tracker.name === t.name) {
-            updatedTrackers.push({
-              name: t.name,
-              status: true,
-              _id: t._id,
-              subcategory: t.subcategory,
-            });
-          } else {
-            updatedTrackers.push({
+
+      if (migraine?.selected_trackers.length !== 0) {
+        res.data.allTrackers.map((t) => {
+          migraine?.selected_trackers.map((tracker) => {
+            if (tracker.name === t.name) {
+              updatedTrackers.push({
+                name: t.name,
+                status: true,
+                _id: t._id,
+                subcategory: t.subcategory,
+              });
+            } else {
+              updatedTrackers.push({
+                name: t.name,
+                status: false,
+                _id: t._id,
+                subcategory: t.subcategory,
+              });
+            }
+          });
+        });
+        setTrackers(updatedTrackers);
+      } else if (migraine?.selected_trackers.length === 0) {
+        setTrackers(
+          res.data.allTrackers.map((t) => {
+            return {
               name: t.name,
               status: false,
               _id: t._id,
               subcategory: t.subcategory,
-            });
-          }
-        });
-      });
-
-      setTrackers(updatedTrackers);
+            };
+          })
+        );
+      }
     });
   }, [migraine]);
 

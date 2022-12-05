@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import apiHandler from "../api/apiHandler";
 import service from "../api/apiHandler";
 import { getIntensityDescription } from "../helpers";
-import DateInput from "../components/dateInput/dateInput";
+import DateInput from "../components/DateInput/DateInput";
 import IntensityInput from "../components/IntensityInput/IntensityInput";
 import PhasesCheckbox from "../components/PhasesCheckbox/PhasesCheckbox";
 import Notes from "../components/Notes/Notes";
