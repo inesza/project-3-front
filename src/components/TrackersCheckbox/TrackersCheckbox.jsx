@@ -13,30 +13,30 @@ const TrackersCheckbox = ({
   return (
     <div>
       <h2>Trackers Category</h2>
-      <ul>
+      <div className="trackers">
         {trackersCategory.map((trackerCategory) => {
           return (
             <div key={trackerCategory._id}>
-              <h2>
-                {" "}
+              <div className="tracker-category-checkbox">
                 <label htmlFor={trackerCategory.name}>
-                  {trackerCategory.name}
+                  <input
+                    type="checkbox"
+                    id={trackerCategory.name}
+                    name={trackerCategory.name}
+                    value={trackerCategory.name}
+                    onChange={() =>
+                      handleTrack(
+                        trackerCategory._id,
+                        setTrackersCategory,
+                        trackersCategory
+                      )
+                    }
+                    checked={trackerCategory.status}
+                  />
+                  <img src="/images/formImages/aura.svg" alt="" />
                 </label>
-                <input
-                  type="checkbox"
-                  id={trackerCategory.name}
-                  name={trackerCategory.name}
-                  value={trackerCategory.name}
-                  onChange={() =>
-                    handleTrack(
-                      trackerCategory._id,
-                      setTrackersCategory,
-                      trackersCategory
-                    )
-                  }
-                  checked={trackerCategory.status}
-                />
-              </h2>
+                <h3>{trackerCategory.name}</h3>
+              </div>
 
               {trackerCategory.status &&
                 trackersSubCategory
@@ -106,7 +106,7 @@ const TrackersCheckbox = ({
             </div>
           );
         })}
-      </ul>
+      </div>
     </div>
   );
 };

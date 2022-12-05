@@ -1,9 +1,9 @@
 import React from "react";
 
-const DateInput = ({ name, id, value, min, handleDate }) => {
+const DateInputStart = ({ name, id, value, min, handleDate }) => {
   return (
-    <div>
-      <label htmlFor={name}>Start Date:</label>
+    <section>
+      <h3 className="w-100">When did it start?</h3>
       <input
         type="datetime-local"
         name={name}
@@ -14,8 +14,8 @@ const DateInput = ({ name, id, value, min, handleDate }) => {
           handleDate(event);
         }}
       />
-    </div>
+    </section>
   );
 };
 
-export default DateInput;
+export default DateInputStart;
