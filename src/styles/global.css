@@ -81,6 +81,12 @@ form button {
 .btn-orange {
 	background: var(--orange);
 	border: 1px solid var(--white);
+	transition: .5s;
+}
+
+.btn-orange:hover {
+	background: transparent;
+	transform: scale(.95);
 }
 
 .btn-orange-shadow-mint {
@@ -113,10 +119,12 @@ form button {
 	background: var(--mint-green);
 }
 
-section.dark-bg-orange-shadow {
+section.dark-bg-orange-shadow,
+div.dark-bg-orange-shadow {
 	background: var(--darkest);
 	border-radius: 10px;
 	box-shadow: var(--shadow-solid-orange);
 	margin: 1em auto;
 	padding: 1em;
+	overflow: hidden;
 }

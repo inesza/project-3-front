@@ -29,7 +29,7 @@ const FormSignIn = () => {
   };
 
   return (
-    <>
+    <section className="dark-bg-orange-shadow">
       {error && <h3 className="error">{error.message}</h3>}
       <form onSubmit={handleSubmit}>
         <h2>Log in</h2>
@@ -53,7 +53,7 @@ const FormSignIn = () => {
         />
         <button>Submit</button>
       </form>
-    </>
+    </section>
   );
 };
 

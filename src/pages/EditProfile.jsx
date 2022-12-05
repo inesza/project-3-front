@@ -3,9 +3,9 @@ import FormSignUp from "../components/Forms/FormSignUp";
 
 const EditProfile = () => {
   return (
-    <div>
+    <section className="signup">
       <FormSignUp edit={true} />
-    </div>
+    </section>
   );
 };
 

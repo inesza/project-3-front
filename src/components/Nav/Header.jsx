@@ -62,6 +62,7 @@ const Header = () => {
             initial={{ width: 0 }}
             animate={{ width: 250, position: "absolute", top: 0, right: 0 }}
             exit={{ width: 0, transition: { delay: 0.5 } }}
+            className="side-menu"
           >
             <motion.nav
               className="top-nav"

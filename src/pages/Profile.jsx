@@ -17,27 +17,39 @@ const Profile = () => {
   }, []);
 
   return (
-    <section className="profile dark-bg-orange-shadow ">
-      <div className="edit-profile">
-        <Link to="/profile/edit" className="btn btn-orange">
-          Edit my profile
-        </Link>
+    <section className="profile">
+      <div>
+        <div className="edit-profile">
+          <Link to="/profile/edit" className="btn btn-orange">
+            Edit my profile
+          </Link>
+        </div>
+        <h1>Hello {currentUser.username}!</h1>
+        <section className="migraine-journal dark-bg-orange-shadow">
+          <h2>Migraine journal</h2>
+          {migraines.length !== 0 &&
+            lastMigraines.map((migraine) => {
+              return (
+                <>
+                  <MigraineSummaryCard migraine={migraine} key={migraine._id} />
+                </>
+              );
+            })}
+          <Link to="/migraines">Older entries</Link>
+          {migraines.length === 0 && (
+            <div className="empty-journal">
+              <span>No Migraines to show</span>
+              <Link
+                to="/migraines/create"
+                className="btn btn-orange-shadow-mint"
+              >
+                Start tracking now
+              </Link>
+            </div>
+          )}
+        </section>
+        <section className="stats dark-bg-orange-shadow">Stats</section>
       </div>
-      <h1>Hello {currentUser.username}!</h1>
-      <section className="migraine-journal">
-        Migraine journal
-        {migraines.length !== 0 &&
-          lastMigraines.map((migraine) => {
-            return (
-              <>
-                <MigraineSummaryCard migraine={migraine} key={migraine._id} />
-                <Link to="/migraines">Older entries</Link>
-              </>
-            );
-          })}
-        {migraines.length === 0 && <div>No Migraines to show</div>}
-      </section>
-      <section className="stats">Stats</section>
     </section>
   );
 };

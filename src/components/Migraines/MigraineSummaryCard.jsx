@@ -34,11 +34,12 @@ const MigraineSummaryCard = ({ migraine }) => {
   const duration = getDuration(migraine.start_date, migraine.end_date);
   return (
     <article>
-      {day}
-      <br />
-      Intensity: {migraine.intensity}/10 <br />
-      Duration: {duration}
-      <Link to={`/migraines/${migraine._id}`}>View details</Link>
+      <h3>{day}</h3>
+      <p>Intensity: {migraine.intensity}/10</p>
+      <p>Duration: {duration}</p>
+      <p>
+        <Link to={`/migraines/${migraine._id}`}>View details</Link>
+      </p>
     </article>
   );
 };

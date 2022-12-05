@@ -4,8 +4,9 @@ const FormSignUpStep1 = ({ page, setPage, formData, setFormData, x, setX }) => {
   return (
     <motion.div
       initial={{ x: x }}
-      transition={{ duration: 1 }}
+      transition={{ delay: 0, duration: 1 }}
       animate={{ x: 0 }}
+      className="form-sign-up-div"
     >
       <input
         type="text"
@@ -25,7 +26,7 @@ const FormSignUpStep1 = ({ page, setPage, formData, setFormData, x, setX }) => {
         value={formData.password}
         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
       />
-      <div className="form-nav">
+      <div className="form-nav" style={{ textAlign: "right" }}>
         <button
           onClick={() => {
             setPage(page + 1);
