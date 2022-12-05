@@ -4,8 +4,9 @@ const FormSignUpStep2 = ({ page, setPage, formData, setFormData, x, setX }) => {
   return (
     <motion.div
       initial={{ x: x }}
-      transition={{ duration: 1 }}
+      transition={{ delay: 0, duration: 1 }}
       animate={{ x: 0 }}
+      className="form-sign-up-div"
     >
       <select
         name="gender"
@@ -28,12 +29,13 @@ const FormSignUpStep2 = ({ page, setPage, formData, setFormData, x, setX }) => {
         value={formData.birth}
         onChange={(e) => setFormData({ ...formData, birth: e.target.value })}
       />
-      <div className="form-nav">
+      <div className="form-nav" style={{ textAlign: "left" }}>
         <button
           onClick={() => {
             setPage(page - 1);
             setX(-1000);
           }}
+          className="btn-grey-shadow-light-grey "
         >
           Previous
         </button>

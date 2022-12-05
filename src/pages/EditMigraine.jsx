@@ -5,7 +5,9 @@ import apiHandler from "../api/apiHandler";
 import service from "../api/apiHandler";
 import axios from "axios";
 import { getIntensityDescription } from "../helpers";
-import DateInput from "../components/DateInput/DateInput";
+import DateInputEnd from "../components/DateInput/DateInputEnd";
+import DateInputStart from "../components/DateInput/DateInputStart";
+
 import IntensityInput from "../components/IntensityInput/IntensityInput";
 import PhasesCheckbox from "../components/PhasesCheckbox/PhasesCheckbox";
 import Notes from "../components/Notes/Notes";
@@ -193,13 +195,13 @@ const EditMigraine = () => {
       <form onSubmit={handleSubmit}>
         <h2>Edit Migraine</h2>
 
-        <DateInput
+        <DateInputStart
           name="start-date"
           id="start-date"
           value={start_date}
           handleDate={handleDate}
         />
-        <DateInput
+        <DateInputEnd
           name="end-date"
           id="end-date"
           value={end_date}

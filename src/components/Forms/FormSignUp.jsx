@@ -65,13 +65,14 @@ const FormSignUp = ({ edit }) => {
       <section className="dark-bg-orange-shadow">
         {edit && <h2>Edit Profile</h2>}
         {!edit && <h2>Sign up</h2>}
-        <div
-          className="progress-bar-container"
-          style={{
-            justifyContent: page === 0 ? "flex-start" : "flex-end",
-          }}
-        >
-          <div className="progress-bar"></div>
+        <div className="progress-bar-container">
+          <div
+            className="progress-bar"
+            style={{
+              transform: page === 0 ? "translateX(0)" : "translateX(100%)",
+              transition: "1s",
+            }}
+          ></div>
         </div>
         <form onSubmit={handleSubmit}>
           {stepsList[page]}

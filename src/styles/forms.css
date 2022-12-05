@@ -12,14 +12,23 @@ form>* {
     padding: 1em;
 }
 
-.signup form,
-.signin form,
 .new-migraine-container>div:first-child {
     background: var(--darkest);
     box-shadow: var(--shadow-solid-orange);
     border-radius: 10px;
     padding-top: 2em;
     padding-bottom: 2em;
+}
+
+.signup,
+.signin {
+    margin: 1em;
+}
+
+.form-sign-up-div {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
 }
 
 form input[type="text"],
@@ -90,6 +99,13 @@ form button {
     color: white;
     border: 3px solid var(--darkest);
     box-shadow: 7px 7px 0px var(--mint-green);
+    transition: .5s;
+    cursor: pointer;
+}
+
+form button:hover {
+    box-shadow: 7px 7px 0 var(--lilac);
+    transform: scale(.95);
 }
 
 textarea {

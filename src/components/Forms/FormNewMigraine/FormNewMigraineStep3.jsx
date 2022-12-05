@@ -3,23 +3,14 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import useCheckbox from "../../../hooks/useCheckbox";
-import TrackersCheckbox from "../../TrackersCheckbox/TrackersCheckbox";
 
-const FormNewMigraineStep2 = ({
+const FormNewMigraineStep3 = ({
   page,
   setPage,
   formData,
   setFormData,
-  handleFormData,
   x,
   setX,
-  handleTrack,
-  trackersCategory,
-  trackersSubCategory,
-  trackers,
-  setTrackersCategory,
-  setTrackersSubCategory,
-  setTrackers,
 }) => {
   return (
     <motion.div
@@ -28,15 +19,7 @@ const FormNewMigraineStep2 = ({
       animate={{ x: 0 }}
       className="form-sign-up-div"
     >
-      <TrackersCheckbox
-        trackersCategory={trackersCategory}
-        trackersSubCategory={trackersSubCategory}
-        trackers={trackers}
-        handleTrack={handleTrack}
-        setTrackersCategory={setTrackersCategory}
-        setTrackersSubCategory={setTrackersSubCategory}
-        setTrackers={setTrackers}
-      />
+      <h2>Treatments Category</h2>
       <div
         className="form-nav"
         style={{ display: "flex", justifyContent: "space-between" }}
@@ -63,4 +46,4 @@ const FormNewMigraineStep2 = ({
   );
 };
 
-export default FormNewMigraineStep2;
+export default FormNewMigraineStep3;

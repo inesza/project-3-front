@@ -20,6 +20,10 @@ nav.top-nav {
 	box-shadow: -5px 5px 10px rgba(211, 207, 255, 0.24);
 }
 
+.side-menu {
+	z-index: 2000;
+}
+
 nav.top-nav span {
 	font-size: 1.8em;
 	text-align: right;
