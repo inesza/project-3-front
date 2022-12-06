@@ -8,7 +8,6 @@ const getDuration = (start, end) => {
   {
     const startDateTimestamp = new Date(start).getTime();
     const endDateTimestamp = new Date(end).getTime();
-    console.log(startDateTimestamp);
     if (end !== null) {
       const diff = endDateTimestamp - startDateTimestamp;
       const hours = Math.floor(diff / 60 / 60 / 1000);
@@ -18,7 +17,6 @@ const getDuration = (start, end) => {
       const runningTime = Date.now() - startDateTimestamp;
       const hours = Math.floor(runningTime / 60 / 60 / 1000);
       const minutes = Math.floor(runningTime / 60 / 1000) - hours * 60;
-      const seconds = Math.floor(runningTime);
       return `Running for ${hours} hours ${computeTwoDigitNumber(
         minutes
       )} minutes `;
