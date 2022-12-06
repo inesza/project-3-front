@@ -1,0 +1,88 @@
+.migraine-single .buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1em;
+}
+
+.btn-edit-migraine,
+.btn-delete-migraine {
+    height: 35px;
+    width: 35px;
+    background: var(--orange);
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    color: white;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.btn-edit-migraine {
+    background: var(--lilac);
+}
+
+.btn-edit-migraine:hover,
+.btn-delete-migraine:hover {
+    transform: scale(.95);
+    background: var(--darkest);
+    box-shadow: var(--shadow-solid-light-grey);
+}
+
+.migraine-single .dates-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.migraine-single .dates {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.migraine-single .duration {
+    width: 30%;
+    background: var(--dark-blue);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    margin: 0 1em;
+    padding: 1em;
+}
+
+.migraine-single .duration .time {
+    font-size: 2em;
+    font-weight: 500;
+}
+
+.migraine-single .intensity {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em
+}
+
+.migraine-single .intensity-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-weight: 500;
+    font-size: 1.2em;
+}
+
+.migraine-single .intensity-icon {
+    font-size: 4em;
+    border-radius: 50%;
+    width: 25%;
+}
+
+.migraine-single .intensity-icon svg {
+    border-radius: 50%;
+}
