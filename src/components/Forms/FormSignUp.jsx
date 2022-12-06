@@ -26,6 +26,7 @@ const FormSignUp = ({ edit }) => {
   });
   const stepsList = [
     <FormSignUpStep1
+      currentUser={currentUser}
       page={page}
       setPage={setPage}
       formData={formData}
@@ -34,6 +35,7 @@ const FormSignUp = ({ edit }) => {
       setX={setX}
     />,
     <FormSignUpStep2
+      currentUser={currentUser}
       page={page}
       setPage={setPage}
       formData={formData}
