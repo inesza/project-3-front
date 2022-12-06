@@ -47,7 +47,6 @@ const RadarStats = () => {
       });
     });
   }
-
   //   const keys = cat.map((category) => {
   //     return category.name;
   //   });
