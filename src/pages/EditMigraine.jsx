@@ -21,37 +21,9 @@ const EditMigraine = () => {
     trackersSubCategory: [],
     trackers: [],
     formData: {},
-    checkboxData: [
-      {
-        value: "Prodrome",
-        status: false,
-        img: "/images/formImages/prodrome.svg",
-      },
-      {
-        value: "Postdrome",
-        status: false,
-        img: "/images/formImages/postdrome.svg",
-      },
-      {
-        value: "Aura",
-        status: false,
-        img: "/images/formImages/aura.svg",
-      },
-
-      {
-        value: "Headache",
-        status: false,
-        img: "/images/formImages/headache.svg",
-      },
-      {
-        value: "Other/Unsure",
-        status: false,
-        img: "/images/formImages/other.svg",
-      },
-    ],
+    checkboxData: [],
   });
 
-  // console.log(migraine);
   const {
     migraineData,
     trackersCategory,
@@ -137,6 +109,21 @@ const EditMigraine = () => {
             trackers: updatedTrackers,
           };
         });
+        return service.get("/api/phases");
+      })
+      .then((res) => {
+        setMigraine((currentValue) => {
+          return {
+            ...currentValue,
+            checkboxData: res.data.map((phase) => {
+              return {
+                value: phase.value,
+                status: migraineData.phases.includes(phase.value),
+                img: phase.img,
+              };
+            }),
+          };
+        });
       })
       .catch((e) => console.log(e));
   }, []);
@@ -154,7 +141,6 @@ const EditMigraine = () => {
       formData["selected_trackers"] = trackers
         .filter((tracker) => tracker.status)
         .map((tracker) => tracker._id);
-      // console.log(formData);
       const { data } = await service.put(`/api/migraines/${id}`, formData);
       navigate("/profile");
     } catch (error) {

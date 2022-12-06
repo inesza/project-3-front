@@ -24,6 +24,7 @@ const FormSignIn = () => {
         navigate("/");
       })
       .catch((e) => {
+        console.log(e.response);
         setError(e.response.data);
       });
   };

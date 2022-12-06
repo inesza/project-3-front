@@ -30,34 +30,7 @@ const NewMigraine = () => {
   const [page, setPage] = useState(0);
 
   // // Handling the "phases" checkboxes values for the form
-  const [checkboxData, setCheckboxData] = useState([
-    {
-      value: "Prodrome",
-      status: false,
-      img: "/images/formImages/prodrome.svg",
-    },
-    {
-      value: "Postdrome",
-      status: false,
-      img: "/images/formImages/postdrome.svg",
-    },
-    {
-      value: "Aura",
-      status: false,
-      img: "/images/formImages/aura.svg",
-    },
-
-    {
-      value: "Headache",
-      status: false,
-      img: "/images/formImages/headache.svg",
-    },
-    {
-      value: "Other/Unsure",
-      status: false,
-      img: "/images/formImages/other.svg",
-    },
-  ]);
+  const [checkboxData, setCheckboxData] = useState([]);
 
   const [formData, setFormData] = useState({
     start_date: startDate,
@@ -68,33 +41,39 @@ const NewMigraine = () => {
 
   //Getting all trackers, categories and subcategories to display them on form
   useEffect(() => {
-    service.get("/api/trackers").then((res) => {
-      setTrackersCategory(
-        res.data.allTrackersCategory.map((t) => {
-          return { name: t.name, status: false, _id: t._id };
-        })
-      );
-      setTrackersSubCategory(
-        res.data.allTrackersSubCategory.map((t) => {
-          return {
-            name: t.name,
-            status: false,
-            _id: t._id,
-            category: t.category,
-          };
-        })
-      );
-      setTrackers(
-        res.data.allTrackers.map((t) => {
-          return {
-            name: t.name,
-            status: false,
-            _id: t._id,
-            subcategory: t.subcategory,
-          };
-        })
-      );
-    });
+    service
+      .get("/api/trackers")
+      .then((res) => {
+        setTrackersCategory(
+          res.data.allTrackersCategory.map((t) => {
+            return { name: t.name, status: false, _id: t._id };
+          })
+        );
+        setTrackersSubCategory(
+          res.data.allTrackersSubCategory.map((t) => {
+            return {
+              name: t.name,
+              status: false,
+              _id: t._id,
+              category: t.category,
+            };
+          })
+        );
+        setTrackers(
+          res.data.allTrackers.map((t) => {
+            return {
+              name: t.name,
+              status: false,
+              _id: t._id,
+              subcategory: t.subcategory,
+            };
+          })
+        );
+        return service.get("/api/phases");
+      })
+      .then((res) => {
+        setCheckboxData(res.data);
+      });
   }, []);
 
   const { start_date, end_date, intensity, notes } = formData;
@@ -129,21 +108,6 @@ const NewMigraine = () => {
       })
     );
   };
-
-  // const { title, description, icon } =
-  //   getIntensityDescription(intensityDetails);
-  // useEffect(() => {
-  //   setIntensityDetails(intensity);
-  // }, [intensity]);
-
-  // const handleDate = (event) => {
-  //   if (event.target.name === "start-date") {
-  //     setStartDate(startDate);
-  //     setFormData({ ...formData, start_date: event.target.value });
-  //   } else if (event.target.name === "end-date") {
-  //     setFormData({ ...formData, end_date: event.target.value });
-  //   }
-  // };
 
   const handleFormData = (event) => {
     if (event.target.name === "intensity") {
@@ -209,7 +173,9 @@ const NewMigraine = () => {
       setX={setX}
     />,
   ];
-
+  if (checkboxData.length === 0) {
+    return <div>Loading...</div>;
+  }
   return (
     <section className="new-migraine-container">
       <div>
@@ -219,97 +185,6 @@ const NewMigraine = () => {
           {stepsList[page]}
           <br />
           {page === stepsList.length - 1 && <button>Submit</button>}
-          {/* <FormNewMigraineStep1
-            page={page}
-            setPage={setPage}
-            formData={formData}
-            setFormData={setFormData}
-            handleFormData={handleFormData}
-            x={x}
-            setX={setX}
-            startDate={startDate}
-            setStartDate={setStartDate}
-            intensity={intensity}
-            intensityDetails={intensityDetails}
-            setIntensityDetails={setIntensityDetails}
-            handleTrack={handleTrack}
-          />
-
-          <FormNewMigraineStep2
-            page={page}
-            setPage={setPage}
-            formData={formData}
-            setFormData={setFormData}
-            handleFormData={handleFormData}
-            x={x}
-            setX={setX}
-            trackersCategory={trackersCategory}
-            trackersSubCategory={trackersSubCategory}
-            trackers={trackers}
-            handleTrack={handleTrack}
-            setTrackersCategory={setTrackersCategory}
-            setTrackersSubCategory={setTrackersSubCategory}
-            setTrackers={setTrackers}
-          />
-
-          <FormNewMigraineStep3 />
-
-          <FormNewMigraineStep4
-            page={page}
-            setPage={setPage}
-            formData={formData}
-            setFormData={setFormData}
-            handleFormData={handleFormData}
-            x={x}
-            setX={setX}
-          /> */}
-
-          {/* <DateInputStart
-            name="start-date"
-            id="start-date"
-            value={start_date}
-            handleDate={handleDate}
-          />
-
-          <DateInputEnd
-            name="end-date"
-            id="end-date"
-            value={end_date}
-            min={start_date}
-            handleDate={handleDate}
-          /> */}
-          {/* 
-          <IntensityInput
-            name="intensity"
-            min="0"
-            max="10"
-            value={intensity}
-            intensity={intensity}
-            title={title}
-            description={description}
-            icon={icon}
-            handleFormData={handleFormData}
-          /> */}
-
-          {/* <PhasesCheckbox
-            checkboxData={checkboxData}
-            setCheckboxData={setCheckboxData}
-            handleTrack={handleTrack}
-          /> */}
-
-          {/* <Notes name="notes" value={notes} handleFormData={handleFormData} /> */}
-
-          {/* <TrackersCheckbox
-            trackersCategory={trackersCategory}
-            trackersSubCategory={trackersSubCategory}
-            trackers={trackers}
-            handleTrack={handleTrack}
-            setTrackersCategory={setTrackersCategory}
-            setTrackersSubCategory={setTrackersSubCategory}
-            setTrackers={setTrackers}
-          /> */}
-
-          {/* <button>Save migraine entry</button> */}
         </form>
       </div>
     </section>
