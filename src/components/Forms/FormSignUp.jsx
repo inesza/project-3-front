@@ -8,9 +8,11 @@ import FormSignUpStep1 from "./FormSignUp/FormSignUpStep1";
 import FormSignUpStep2 from "./FormSignUp/FormSignUpStep2";
 import ModalConfirmDelete from "../ModalConfirmDelete";
 import useModal from "../../hooks/useModal";
+import useAuth from "../../auth/useAuth";
 
 const FormSignUp = ({ edit }) => {
   const navigate = useNavigate();
+  const { isLoggedIn, currentUser, removeUser } = useAuth();
   const [error, setError] = useState(null);
   const [x, setX] = useState(0);
   const [page, setPage] = useState(0);
@@ -70,6 +72,7 @@ const FormSignUp = ({ edit }) => {
       )
       .then(
         setTimeout(() => {
+          removeUser();
           navigate("/");
         }, 1000)
       )

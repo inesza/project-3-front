@@ -7,6 +7,7 @@ import useModal from "../hooks/useModal";
 
 const MigraineSingle = () => {
   const [migraine, setMigraine] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
   const { isShowing, toggleModal } = useModal();
@@ -19,10 +20,25 @@ const MigraineSingle = () => {
         setMigraine(response.data);
       })
       .catch((e) => {
-        console.error(e.message);
+        console.log(e);
+        setErrorMessage(e.response.data.errorMessage);
       });
   }, []);
-  if (!migraine) return <div className="loading">Loading...</div>;
+
+  if (!migraine)
+    return (
+      <div className="loading">
+        {errorMessage && (
+          <div>
+            <p>{errorMessage}</p>
+            <button>
+              <Link to={"/profile"}>Profile</Link>
+            </button>
+          </div>
+        )}
+        {!errorMessage && <p className="errorMessage">Loading...</p>}
+      </div>
+    );
   const intensityDetails = getIntensityDescription(migraine.intensity);
 
   const handleDelete = () => {
@@ -38,7 +54,7 @@ const MigraineSingle = () => {
         }, 1000)
       )
       .catch((e) => {
-        console.error(e.message);
+        console.error(e);
       });
   };
 
