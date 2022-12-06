@@ -34,6 +34,7 @@ const EditMigraine = () => {
   } = migraine;
 
   const { start_date, end_date, intensity, notes } = formData;
+  const [isFinished, setIsFinished] = useState(false);
 
   useEffect(() => {
     let formData;
@@ -45,11 +46,14 @@ const EditMigraine = () => {
       .then((res) => {
         let endDate;
         const startDate = res.data.start_date.split(".")[0].slice(0, -3);
+        const rightNow = new Date().toISOString().split(".")[0].slice(0, -3);
+
         if (res.data.end_date) {
           endDate = res.data?.end_date.split(".")[0].slice(0, -3);
+          setIsFinished(true);
+        } else {
+          endDate = rightNow;
         }
-        const rightNow = new Date().toISOString().split(".")[0].slice(0, -3);
-        endDate = rightNow;
 
         const selectedPhases = res.data.phases.map((phase) => phase.name);
         const phases = [];
@@ -209,6 +213,7 @@ const EditMigraine = () => {
           value={end_date}
           min={migraineData.start_date}
           handleDate={handleDate}
+          isFinished={isFinished}
         />
         <IntensityInput
           name="intensity"
