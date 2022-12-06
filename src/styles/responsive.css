@@ -1,0 +1,15 @@
+@media (width > 1024px) {
+    .profile {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1em;
+    }
+
+    .profile>section {
+        width: calc(50% - 2em);
+    }
+
+    section:not(.profile) .migraine-journal .migraine-card {
+        width: 50%;
+    }
+}

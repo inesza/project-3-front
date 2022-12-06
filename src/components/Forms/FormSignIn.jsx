@@ -21,7 +21,7 @@ const FormSignIn = () => {
         console.log(res);
         storeToken(res.authToken);
         authenticateUser();
-        navigate("/");
+        navigate("/profile");
       })
       .catch((e) => {
         setError(e.response.data);

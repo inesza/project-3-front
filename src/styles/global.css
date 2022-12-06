@@ -76,6 +76,7 @@ form button {
 	padding: .5em 2em;
 	border: 1px solid black;
 	display: inline-block;
+	cursor: pointer;
 }
 
 .btn-orange {
@@ -86,7 +87,7 @@ form button {
 
 .btn-orange:hover {
 	background: transparent;
-	transform: scale(.95);
+	transform: scale(.98);
 }
 
 .btn-orange-shadow-mint {
@@ -94,7 +95,14 @@ form button {
 	border: 1px solid var(--darkest);
 	box-shadow: var(--shadow-solid-mint);
 	color: white;
+	transition: .5s;
 }
+
+.btn-orange-shadow-mint:hover {
+	box-shadow: var(--shadow-solid-lilac);
+	transform: scale(.98);
+}
+
 
 .btn-grey-shadow-light-grey {
 	background: var(--dark-blue);
@@ -124,6 +132,16 @@ div.dark-bg-orange-shadow {
 	background: var(--darkest);
 	border-radius: 10px;
 	box-shadow: var(--shadow-solid-orange);
+	margin: 1em auto;
+	padding: 1em;
+	overflow: hidden;
+}
+
+section.dark-bg-grey-shadow,
+div.dark-bg-grey-shadow {
+	background: var(--darkest);
+	border-radius: 10px;
+	box-shadow: var(--shadow-solid-light-grey);
 	margin: 1em auto;
 	padding: 1em;
 	overflow: hidden;

@@ -4,7 +4,7 @@ const computeTwoDigitNumber = (value) => {
 };
 
 // Get crisis duration in minutes and hours
-const getDuration = (start, end) => {
+const getDuration = (start, end, format) => {
   {
     const startDateTimestamp = new Date(start).getTime();
     const endDateTimestamp = new Date(end).getTime();
@@ -12,16 +12,42 @@ const getDuration = (start, end) => {
       const diff = endDateTimestamp - startDateTimestamp;
       const hours = Math.floor(diff / 60 / 60 / 1000);
       const minutes = Math.floor(diff / 60 / 1000) - hours * 60;
+      if (format && format === "short")
+        return `${hours}h${computeTwoDigitNumber(minutes)}`;
       return `${hours} hours ${computeTwoDigitNumber(minutes)} minutes `;
     } else {
       const runningTime = Date.now() - startDateTimestamp;
       const hours = Math.floor(runningTime / 60 / 60 / 1000);
       const minutes = Math.floor(runningTime / 60 / 1000) - hours * 60;
+      const seconds = Math.floor(runningTime);
+      if (format && format === "short")
+        return `Running for ${hours}h${computeTwoDigitNumber(minutes)}`;
       return `Running for ${hours} hours ${computeTwoDigitNumber(
         minutes
       )} minutes `;
     }
   }
+};
+
+// Display date as human readable format (with or without hours)
+const getHumanReadableDate = (date, format) => {
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  };
+  if (format === "hours") options.weekday = "short";
+  let readableDate = new Date(date).toLocaleDateString("en-GB", options);
+  if (format === "hours") {
+    readableDate += ` - ${new Date(date).toLocaleTimeString("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+    })}`;
+  }
+
+  //   Display day as human readable format(in english)
+  return readableDate;
 };
 
 // Provides description based on crisis intensity
@@ -95,4 +121,9 @@ const getIntensityDescription = (intensity) => {
   return intensityDetails;
 };
 
-export { computeTwoDigitNumber, getDuration, getIntensityDescription };
+export {
+  computeTwoDigitNumber,
+  getDuration,
+  getIntensityDescription,
+  getHumanReadableDate,
+};
