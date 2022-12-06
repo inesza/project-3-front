@@ -71,8 +71,13 @@ const EditMigraine = () => {
     service
       .get(`/api/migraines/${id}`)
       .then((res) => {
+        let endDate;
         const startDate = res.data.start_date.split(".")[0].slice(0, -3);
-        const endDate = res.data.end_date.split(".")[0].slice(0, -3);
+        if (res.data.end_date) {
+          endDate = res.data?.end_date.split(".")[0].slice(0, -3);
+        }
+        const rightNow = new Date().toISOString().split(".")[0].slice(0, -3);
+        endDate = rightNow;
 
         const selectedPhases = res.data.phases.map((phase) => phase.name);
         const phases = [];
@@ -84,7 +89,6 @@ const EditMigraine = () => {
             img: phase.img,
           });
         });
-        console.log(phases);
 
         formData = {
           _id: res.data._id,
