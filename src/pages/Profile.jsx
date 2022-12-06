@@ -10,6 +10,7 @@ const Profile = () => {
   const { isLoggedIn, currentUser, removeUser } = useAuth();
   const [migraines, setMigraines] = useState([]);
   const lastMigraines = migraines.slice(0, 2);
+
   useEffect(() => {
     service.getAllMigraines().then((data) => {
       setMigraines(data);
