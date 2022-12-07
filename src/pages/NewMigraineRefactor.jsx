@@ -97,10 +97,11 @@ const NewMigraine = () => {
     }
   };
 
-  const handleTrack = (id, func, obj) => {
+  const handleTrack = (id, func, obj, type) => {
     const copy = JSON.parse(JSON.stringify(obj));
     func(
       copy.map((category) => {
+        if (type === "category" && category.status) category.status = false;
         if (id === category._id || id === category.value) {
           category.status = !category.status;
         }

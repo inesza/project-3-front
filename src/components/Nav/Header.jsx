@@ -60,7 +60,7 @@ const Header = () => {
         {open && (
           <motion.div
             initial={{ width: 0 }}
-            animate={{ width: 250, position: "absolute", top: 0, right: 0 }}
+            animate={{ width: 250, position: "fixed", right: 0 }}
             exit={{ width: 0, transition: { delay: 0.5 } }}
             className="side-menu"
           >

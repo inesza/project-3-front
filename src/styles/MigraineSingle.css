@@ -1,8 +1,15 @@
+.migraine-single {
+    max-width: 800px;
+    margin: 1em;
+}
+
 .migraine-single .buttons {
     display: flex;
     justify-content: flex-end;
     gap: 1em;
 }
+
+
 
 .btn-edit-migraine,
 .btn-delete-migraine {
@@ -56,6 +63,7 @@
     border-radius: 10px;
     margin: 0 1em;
     padding: 1em;
+    text-align: center;
 }
 
 .migraine-single .duration .time {
@@ -85,4 +93,17 @@
 
 .migraine-single .intensity-icon svg {
     border-radius: 50%;
+}
+
+.migraine-single .trackers-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.migraine-single .trackers-list .tracker {
+    background-color: var(--orange);
+    border: 2px solid white;
+    width: auto;
+    padding: .1em .5em;
 }

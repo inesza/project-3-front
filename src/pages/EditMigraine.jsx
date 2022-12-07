@@ -147,10 +147,12 @@ const EditMigraine = () => {
       console.log(error);
     }
   };
-  const handleTrack = (id, func, obj) => {
+
+  const handleTrack = (id, func, obj, type) => {
     const copy = JSON.parse(JSON.stringify(obj));
     func(
       copy.map((category) => {
+        if (type === "category" && category.status) category.status = false;
         if (id === category._id || id === category.value) {
           category.status = !category.status;
         }
@@ -193,60 +195,61 @@ const EditMigraine = () => {
     return <div>Loading...</div>;
   }
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <h2>Edit Migraine</h2>
-
-        <DateInputStart
-          name="start-date"
-          id="start-date"
-          value={start_date}
-          handleDate={handleDate}
-        />
-        <DateInputEnd
-          name="end-date"
-          id="end-date"
-          value={end_date}
-          min={migraineData.start_date}
-          handleDate={handleDate}
-        />
-        <IntensityInput
-          name="intensity"
-          min="0"
-          max="10"
-          value={migraineData.intensity}
-          intensity={intensity}
-          title={title}
-          description={description}
-          icon={icon}
-          handleFormData={handleFormData}
-        />
-        <PhasesCheckbox
-          checkboxData={checkboxData}
-          setCheckboxData={(newValue) => {
-            setMigraine({ ...migraine, checkboxData: newValue });
-          }}
-          handleTrack={handleTrack}
-        />
-        <Notes name="notes" value={notes} handleFormData={handleFormData} />
-        <TrackersCheckbox
-          trackersCategory={trackersCategory}
-          trackersSubCategory={trackersSubCategory}
-          trackers={trackers}
-          handleTrack={handleTrack}
-          setTrackersCategory={(newValue) => {
-            setMigraine({ ...migraine, trackersCategory: newValue });
-          }}
-          setTrackersSubCategory={(newValue) => {
-            setMigraine({ ...migraine, trackersSubCategory: newValue });
-          }}
-          setTrackers={(newValue) => {
-            setMigraine({ ...migraine, trackers: newValue });
-          }}
-        />
-        <button>Edit migraine</button>
-      </form>
-    </div>
+    <section className="new-migraine-container">
+      <div>
+        <h2>Add new migraine</h2>
+        <form onSubmit={handleSubmit}>
+          <DateInputStart
+            name="start-date"
+            id="start-date"
+            value={start_date}
+            handleDate={handleDate}
+          />
+          <DateInputEnd
+            name="end-date"
+            id="end-date"
+            value={end_date}
+            min={migraineData.start_date}
+            handleDate={handleDate}
+          />
+          <IntensityInput
+            name="intensity"
+            min="0"
+            max="10"
+            value={migraineData.intensity}
+            intensity={intensity}
+            title={title}
+            description={description}
+            icon={icon}
+            handleFormData={handleFormData}
+          />
+          <PhasesCheckbox
+            checkboxData={checkboxData}
+            setCheckboxData={(newValue) => {
+              setMigraine({ ...migraine, checkboxData: newValue });
+            }}
+            handleTrack={handleTrack}
+          />
+          <Notes name="notes" value={notes} handleFormData={handleFormData} />
+          <TrackersCheckbox
+            trackersCategory={trackersCategory}
+            trackersSubCategory={trackersSubCategory}
+            trackers={trackers}
+            handleTrack={handleTrack}
+            setTrackersCategory={(newValue) => {
+              setMigraine({ ...migraine, trackersCategory: newValue });
+            }}
+            setTrackersSubCategory={(newValue) => {
+              setMigraine({ ...migraine, trackersSubCategory: newValue });
+            }}
+            setTrackers={(newValue) => {
+              setMigraine({ ...migraine, trackers: newValue });
+            }}
+          />
+          <button>Edit migraine</button>
+        </form>
+      </div>
+    </section>
   );
 };
 
