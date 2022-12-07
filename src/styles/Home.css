@@ -1,0 +1,48 @@
+.mockup {
+    height: 500px;
+    width: 250px;
+    background: transparent;
+    border: 12px solid #333046;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    background: url(/images/logo.svg), var(--dark-blue);
+    margin: 5em;
+    position: relative;
+}
+
+.mockup::before {
+    width: 3px;
+    height: 150px;
+    background: linear-gradient(to bottom, rgba(51, 48, 70, 1) 10%, rgba(233, 255, 0, 0) 10%, rgba(51, 48, 70, 0) 20%, rgba(51, 48, 70, 1) 20%, rgba(51, 48, 70, 1) 55%, rgba(51, 48, 70, 0) 55%, rgba(51, 48, 70, 0) 65%, rgba(51, 48, 70, 1) 65%);
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 15%;
+    z-index: 100000;
+}
+
+.mockup::after {
+    content: "";
+    position: absolute;
+    background: #333046;
+    z-index: -1;
+    bottom: -2.2em;
+    /* left: 15px; */
+    height: 30px;
+    width: 130%;
+    border-radius: 80%;
+    filter: blur(.7em);
+    /* box-shadow: -25px -4px 4px 0 rgba(0, 0, 0, 0.75); */
+    /* transform: skew(30deg); */
+}
+
+
+
+.encoche {
+    width: 45%;
+    height: 16px;
+    border-radius: 0 0 12px 12px;
+    background: #333046;
+    margin-top: -3px;
+}

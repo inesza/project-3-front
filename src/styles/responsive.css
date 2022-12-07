@@ -1,3 +1,13 @@
+@media (width > 650px) {
+
+    .signup,
+    .signin,
+    .new-migraine-container {
+        margin: 1em auto;
+        max-width: 600px;
+    }
+}
+
 @media (width > 1024px) {
 
     .profile,

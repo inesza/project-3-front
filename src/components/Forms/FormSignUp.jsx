@@ -78,7 +78,7 @@ const FormSignUp = ({ edit }) => {
         </form>
         <div style={{ textAlign: "center" }}>
           <Link to={"/signin"} style={{ textDecoration: "underline" }}>
-            Already signed up ? Login !
+            Already have an account? Log in!
           </Link>
         </div>
       </section>

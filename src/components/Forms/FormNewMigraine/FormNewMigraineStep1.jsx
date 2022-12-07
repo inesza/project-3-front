@@ -27,38 +27,6 @@ const FormNewMigraineStep1 = ({
   setCheckboxData,
   handleTrack,
 }) => {
-  // const [intensityDetails, setIntensityDetails] = useState(0);
-
-  // Handling the "phases" checkboxes values for the form
-  // const [checkboxData, setCheckboxData] = useState([
-  //   {
-  //     value: "Prodrome",
-  //     status: false,
-  //     img: "/images/formImages/prodrome.svg",
-  //   },
-  //   {
-  //     value: "Postdrome",
-  //     status: false,
-  //     img: "/images/formImages/postdrome.svg",
-  //   },
-  //   {
-  //     value: "Aura",
-  //     status: false,
-  //     img: "/images/formImages/aura.svg",
-  //   },
-
-  //   {
-  //     value: "Headache",
-  //     status: false,
-  //     img: "/images/formImages/headache.svg",
-  //   },
-  //   {
-  //     value: "Other/Unsure",
-  //     status: false,
-  //     img: "/images/formImages/other.svg",
-  //   },
-  // ]);
-
   const { title, description, icon } =
     getIntensityDescription(intensityDetails);
   useEffect(() => {
@@ -95,34 +63,6 @@ const FormNewMigraineStep1 = ({
         min={formData.start_date}
         handleDate={handleDate}
       />
-
-      {/* <section className="migraine-over-selector">
-            <h3 className="w-100">Is it over yet?</h3>
-            <span
-              className="btn btn-select"
-              style={{ background: bgColorTrue, transition: ".5s" }}
-              onClick={() => handleFinishState(true)}
-            >
-              Yes
-            </span>
-            <span
-              className="btn btn-select"
-              style={{ background: bgColorFalse, transition: ".5s" }}
-              onClick={() => handleFinishState(false)}
-            >
-              No
-            </span>
-
-            {finished && (
-              <DateInput
-                name="end-date"
-                id="end-date"
-                value={end_date}
-                min={start_date}
-                handleDate={handleDate}
-              />
-            )}
-          </section> */}
 
       <IntensityInput
         name="intensity"

@@ -23,6 +23,7 @@ form>* {
 .signup,
 .signin {
     margin: 1em;
+    max-width: 600px;
 }
 
 .form-sign-up-div {
