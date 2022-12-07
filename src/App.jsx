@@ -13,6 +13,7 @@ import EditProfile from "./pages/EditProfile";
 import NewMigraineRefactor from "./pages/NewMigraineRefactor";
 import EditMigraine from "./pages/EditMigraine";
 import AllStats from "./pages/AllStats";
+import SunburstStats from "./components/Stats/SunburstStats";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
               <Route index element={<MigraineJournalFull />} />
               <Route path=":id" element={<MigraineSingle />} />
               <Route path="statistics" element={<AllStats />} />
+              <Route path="sunburst" element={<SunburstStats />} />
             </Route>
             <Route path="/migraines/edit/:id" element={<EditMigraine />} />
             <Route path="/migraines/create" element={<NewMigraineRefactor />} />

@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const DateInputEnd = ({ name, id, value, min, handleDate }) => {
-  const [finished, setFinished] = useState(false);
+const DateInputEnd = ({ name, id, value, min, handleDate, isFinished }) => {
+  const [finished, setFinished] = useState(isFinished);
   const [bgColorFalse, setBgColorFalse] = useState("var(--orange)");
   const [bgColorTrue, setBgColorTrue] = useState("transparent");
+  useEffect(() => {
+    if (isFinished) {
+      setBgColorFalse("transparent");
+      setBgColorTrue("var(--orange)");
+    }
+  }, []);
 
   const handleFinishState = (state) => {
     if (state === true) {
