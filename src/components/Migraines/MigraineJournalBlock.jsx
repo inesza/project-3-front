@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import service from "../../api/ApiHandler";
+import service from "./../../api/apiHandler";
 import MigraineSummaryCard from "./MigraineSummaryCard";
 
 const MigraineJournalBlock = ({ full }) => {
