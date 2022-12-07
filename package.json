@@ -15,6 +15,7 @@
     "@nivo/core": "^0.80.0",
     "@nivo/line": "^0.80.0",
     "@nivo/radar": "^0.80.0",
+    "@nivo/sunburst": "^0.80.0",
     "axios": "^0.25.0",
     "babel-plugin-macros": "^3.1.0",
     "framer-motion": "^7.6.15",
