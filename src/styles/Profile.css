@@ -54,6 +54,10 @@ main>:first-child {
     align-items: center;
 }
 
+.migraine-journal h2 {
+    width: 100%;
+}
+
 .migraine-journal .migraine-card {
     width: 100%;
     background: var(--dark-blue);

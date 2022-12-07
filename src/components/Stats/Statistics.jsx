@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import IntensityGraph from "./IntensityGraph";
 import RadarStats from "./RadarStats";
+import SunburstStats from "./SunburstStats";
 import { Link } from "react-router-dom";
 
 const Statistics = ({ full }) => {
@@ -103,6 +104,7 @@ const Statistics = ({ full }) => {
   const statistics = [
     <IntensityGraph key={"Intensity graph"} theme={theme} />,
     <RadarStats key={"radar stats"} theme={theme} />,
+    <SunburstStats key={"sunburst stats"} theme={theme} />,
   ];
   const [stats, setStats] = useState(statistics);
 

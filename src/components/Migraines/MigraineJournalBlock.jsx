@@ -22,7 +22,7 @@ const MigraineJournalBlock = ({ full }) => {
         migraines.map((migraine) => {
           return <MigraineSummaryCard migraine={migraine} key={migraine._id} />;
         })}
-      {!full && (
+      {!full && migraines.length !== 0 && (
         <Link to="/migraines" className="btn btn-orange-shadow-mint">
           Older entries
         </Link>

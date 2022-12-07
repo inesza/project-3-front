@@ -1,10 +1,14 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import useAuth from "../../auth/useAuth";
 import "../../styles/Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRightFromBracket, faBars } from "@fortawesome/free-solid-svg-icons";
+import {
+  faRightFromBracket,
+  faBars,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const [open, cycleOpen] = useState(false);
@@ -80,7 +84,7 @@ const Header = () => {
                     <NavLink to="/migraines">Migraines journal</NavLink>
                   </motion.span>
                   <motion.span variants={itemVariants}>
-                    <NavLink to="/">My stats</NavLink>
+                    <NavLink to="/migraines/statistics">My stats</NavLink>
                   </motion.span>
 
                   <motion.span onClick={removeUser} variants={itemVariants}>
@@ -90,6 +94,17 @@ const Header = () => {
                       style={{ marginLeft: "10px" }}
                     />
                   </motion.span>
+
+                  <Link
+                    to="/migraines/create"
+                    className="nav-new-migraine-button"
+                  >
+                    New record
+                    <FontAwesomeIcon
+                      icon={faPlus}
+                      style={{ marginLeft: "1em" }}
+                    />
+                  </Link>
                 </>
               )}
               {!isLoggedIn && (
