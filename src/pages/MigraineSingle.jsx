@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import service from "../api/ApiHandler";
+import service from "./../api/ApiHandler";
 import {
   getDuration,
   getIntensityDescription,
   getHumanReadableDate,
-} from "../helpers";
-import ModalConfirmDelete from "../components/ModalConfirmDelete";
+} from "./../helpers";
+import ModalConfirmDelete from "./../components/ModalConfirmDelete";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowDown,
