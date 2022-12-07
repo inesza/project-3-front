@@ -1,10 +1,10 @@
 import React from "react";
-import FormSignUp from "../components/Forms/FormSignUp";
+import EditProfileForm from "./../components/EditProfileForm";
 
 const EditProfile = () => {
   return (
     <section className="signup">
-      <FormSignUp edit={true} />
+      <EditProfileForm />
     </section>
   );
 };

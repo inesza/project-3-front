@@ -76,7 +76,6 @@ const SunburstStats = ({ theme }) => {
               count: 1,
             });
           } else if (trackers.indexOf(tracker.name) !== -1) {
-            console.log(trackers.indexOf(tracker.name));
             let index = subcategory.children.findIndex(
               (x) => x.name === tracker.name
             );
@@ -88,8 +87,6 @@ const SunburstStats = ({ theme }) => {
       });
     });
   });
-
-  //console.log(data);
 
   return (
     <div>

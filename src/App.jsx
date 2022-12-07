@@ -36,7 +36,6 @@ function App() {
               <Route index element={<MigraineJournalFull />} />
               <Route path=":id" element={<MigraineSingle />} />
               <Route path="statistics" element={<AllStats />} />
-              <Route path="sunburst" element={<SunburstStats />} />
             </Route>
             <Route path="/migraines/edit/:id" element={<EditMigraine />} />
             <Route path="/migraines/create" element={<NewMigraineRefactor />} />

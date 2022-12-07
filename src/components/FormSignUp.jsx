@@ -1,4 +1,3 @@
-// import useForm from "../../hooks/useForm";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiHandler from "../../api/apiHandler";
@@ -9,7 +8,7 @@ import FormSignUpStep2 from "./FormSignUp/FormSignUpStep2";
 import ModalConfirmDelete from "../ModalConfirmDelete";
 import useModal from "../../hooks/useModal";
 import useAuth from "../../auth/useAuth";
-import { Link } from "react-router-dom";
+
 const FormSignUp = ({ edit }) => {
   const navigate = useNavigate();
   const { isLoggedIn, currentUser, removeUser } = useAuth();
@@ -46,22 +45,47 @@ const FormSignUp = ({ edit }) => {
   ];
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    apiHandler
-      .signup(formData)
-      .then(() => {
-        navigate("/signin");
-      })
-      .catch((error) => {
-        setError(error.response.data.message);
+    if (edit) {
+      service
+        .patch("/api/auth/edit", formData)
+        .then((res) => {
+          navigate("/profile");
+          navigate(0);
+        })
+        .catch((e) => console.log(e));
+    } else {
+      apiHandler
+        .signup(formData)
+        .then(() => {
+          navigate("/signin");
+        })
+        .catch((error) => {
+          setError(error.response);
+        });
+    }
+  };
+  const handleDelete = () => {
+    service
+      .delete(`/api/auth/delete`)
+      .then(
+        (document.querySelector(".modal-header h3").textContent =
+          "Profile deleted")
+      )
+      .then(
+        setTimeout(() => {
+          removeUser();
+          navigate("/");
+        }, 1000)
+      )
+      .catch((e) => {
+        console.error(e.message);
       });
   };
-
   return (
     <section>
       <section className="dark-bg-orange-shadow">
-        <h2>Sign up</h2>
-        {error && error}
+        {edit && <h2>Edit Profile</h2>}
+        {!edit && <h2>Sign up</h2>}
         <div className="progress-bar-container">
           <div
             className="progress-bar"
@@ -76,12 +100,18 @@ const FormSignUp = ({ edit }) => {
           <br />
           {page === 1 && <button>Submit</button>}
         </form>
-        <div style={{ textAlign: "center" }}>
-          <Link to={"/signin"} style={{ textDecoration: "underline" }}>
-            Already signed up ? Login !
-          </Link>
-        </div>
       </section>
+      {edit && (
+        <>
+          <button onClick={toggleModal}>Delete my profile</button>
+          <ModalConfirmDelete
+            isShowing={isShowing}
+            hide={toggleModal}
+            handleDelete={handleDelete}
+            modalTitle={"Delete my profile"}
+          />
+        </>
+      )}
     </section>
   );
 };
