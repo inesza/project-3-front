@@ -44,7 +44,6 @@ const service = {
   },
 
   signin(userInfo) {
-    console.log(userInfo);
     return service
       .post("/api/auth/signin", userInfo)
       .then((res) => res.data)
@@ -57,7 +56,6 @@ const service = {
       .then((res) => res.data)
       .catch(errorHandler);
   },
-
 };
 
 // export default apiHandler

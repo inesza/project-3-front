@@ -3,6 +3,7 @@ import useForm from "../../hooks/useForm";
 import apiHandler from "../../api/apiHandler";
 import useAuth from "../../auth/useAuth";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const FormSignIn = () => {
   const [{ email, password }, handleChange] = useForm({
@@ -53,6 +54,11 @@ const FormSignIn = () => {
         />
         <button>Submit</button>
       </form>
+      <div style={{ textAlign: "center" }}>
+        <Link to={"/signup"} style={{ textDecoration: "underline" }}>
+          Not yet registered ? Signup !
+        </Link>
+      </div>
     </section>
   );
 };

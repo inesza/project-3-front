@@ -73,10 +73,9 @@ const SunburstStats = () => {
             return subcategory.children.push({
               name: tracker.name,
               color: "hsl(316, 70%, 50%)",
-              count: 0,
+              count: 1,
             });
           } else if (trackers.indexOf(tracker.name) !== -1) {
-            console.log(trackers.indexOf(tracker.name));
             let index = subcategory.children.findIndex(
               (x) => x.name === tracker.name
             );
@@ -88,8 +87,6 @@ const SunburstStats = () => {
       });
     });
   });
-
-  //console.log(data);
 
   return (
     <div style={{ height: "50rem" }}>
