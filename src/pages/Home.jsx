@@ -1,12 +1,11 @@
 import React from "react";
 import useAuth from "../auth/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import "./../styles/Home.css";
 
 const Home = () => {
   const { isLoggedIn } = useAuth();
-  const navigate = useNavigate();
-  if (isLoggedIn) navigate("/profile");
+  if (isLoggedIn) return <Navigate to="/profile" />;
   return (
     <div>
       <h1>Migraine Journal</h1>
