@@ -3,19 +3,15 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import useCheckbox from "../../../hooks/useCheckbox";
-import Notes from "../../Notes/Notes";
 
-const FormNewMigraineStep4 = ({
+const FormNewMigraineStep3 = ({
   page,
   setPage,
   formData,
   setFormData,
-  handleFormData,
   x,
   setX,
 }) => {
-  useEffect(() => {}, []);
-
   return (
     <motion.div
       initial={{ x: x }}
@@ -23,12 +19,11 @@ const FormNewMigraineStep4 = ({
       animate={{ x: 0 }}
       className="form-sign-up-div"
     >
-      <Notes
-        name="notes"
-        value={formData.notes}
-        handleFormData={handleFormData}
-      />
-      <div className="form-nav" style={{ textAlign: "left" }}>
+      <h2>Treatments Category</h2>
+      <div
+        className="form-nav"
+        style={{ display: "flex", justifyContent: "space-between" }}
+      >
         <button
           onClick={() => {
             setPage(page - 1);
@@ -38,9 +33,17 @@ const FormNewMigraineStep4 = ({
         >
           Previous
         </button>
+        <button
+          onClick={() => {
+            setPage(page + 1);
+            setX(1000);
+          }}
+        >
+          Next
+        </button>
       </div>
     </motion.div>
   );
 };
 
-export default FormNewMigraineStep4;
+export default FormNewMigraineStep3;

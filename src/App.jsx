@@ -10,10 +10,9 @@ import MigraineJournalFull from "./pages/MigraineJournalFull";
 import MigraineSingle from "./pages/MigraineSingle";
 import NewMigraineButton from "./components/Migraines/NewMigraineButton";
 import EditProfile from "./pages/EditProfile";
-import NewMigraineRefactor from "./pages/NewMigraineRefactor";
+import NewMigraine from "./pages/NewMigraine";
 import EditMigraine from "./pages/EditMigraine";
 import AllStats from "./pages/AllStats";
-import SunburstStats from "./components/Stats/SunburstStats";
 
 function App() {
   return (
@@ -38,7 +37,7 @@ function App() {
               <Route path="statistics" element={<AllStats />} />
             </Route>
             <Route path="/migraines/edit/:id" element={<EditMigraine />} />
-            <Route path="/migraines/create" element={<NewMigraineRefactor />} />
+            <Route path="/migraines/create" element={<NewMigraine />} />
           </Route>
         </Routes>
       </main>

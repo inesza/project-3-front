@@ -56,7 +56,7 @@ const FormSignIn = () => {
       </form>
       <div style={{ textAlign: "center" }}>
         <Link to={"/signup"} style={{ textDecoration: "underline" }}>
-          Not yet registered ? Signup !
+          Not yet registered? Sign up!
         </Link>
       </div>
     </section>

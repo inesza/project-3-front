@@ -1,20 +1,20 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Form, useNavigate, useParams } from "react-router-dom";
-import apiHandler from "../api/apiHandler";
+// import apiHandler from "../api/apiHandler";
 import service from "../api/apiHandler";
-import { getIntensityDescription } from "../helpers";
-import DateInputStart from "../components/DateInput/DateInputStart";
-import DateInputEnd from "../components/DateInput/DateInputEnd";
-import IntensityInput from "../components/IntensityInput/IntensityInput";
-import PhasesCheckbox from "../components/PhasesCheckbox/PhasesCheckbox";
-import Notes from "../components/Notes/Notes";
-import TrackersCheckbox from "../components/TrackersCheckbox/TrackersCheckbox";
+// import { getIntensityDescription } from "../helpers";
+// import DateInputStart from "../components/DateInput/DateInputStart";
+// import DateInputEnd from "../components/DateInput/DateInputEnd";
+// import IntensityInput from "../components/IntensityInput/IntensityInput";
+// import PhasesCheckbox from "../components/PhasesCheckbox/PhasesCheckbox";
+// import Notes from "../components/Notes/Notes";
+// import TrackersCheckbox from "../components/TrackersCheckbox/TrackersCheckbox";
 
 import FormNewMigraineStep1 from "../components/Forms/FormNewMigraine/FormNewMigraineStep1";
 import FormNewMigraineStep2 from "../components/Forms/FormNewMigraine/FormNewMigraineStep2";
 import FormNewMigraineStep3 from "../components/Forms/FormNewMigraine/FormNewMigraineStep3";
-import FormNewMigraineStep4 from "../components/Forms/FormNewMigraine/FormNewMigraineStep4";
+// import FormNewMigraineStep4 from "../components/Forms/FormNewMigraine/FormNewMigraineStep4";
 
 const NewMigraine = () => {
   const navigate = useNavigate();
@@ -23,7 +23,10 @@ const NewMigraine = () => {
   const [trackersSubCategory, setTrackersSubCategory] = useState([]);
   const [intensityDetails, setIntensityDetails] = useState(0);
 
-  const rightNow = new Date().toISOString().split(".")[0].slice(0, -3);
+  // Prefill start date field
+  const dateNoHours = new Date().toISOString().split("T")[0];
+  const hoursNoDate = new Date().toLocaleTimeString().slice(0, -3);
+  const rightNow = dateNoHours + "T" + hoursNoDate;
   const [startDate, setStartDate] = useState(rightNow);
 
   const [x, setX] = useState(0);
@@ -154,17 +157,17 @@ const NewMigraine = () => {
       setTrackers={setTrackers}
     />,
 
-    <FormNewMigraineStep3
-      page={page}
-      setPage={setPage}
-      formData={formData}
-      setFormData={setFormData}
-      handleFormData={handleFormData}
-      x={x}
-      setX={setX}
-    />,
+    // <FormNewMigraineStep3
+    //   page={page}
+    //   setPage={setPage}
+    //   formData={formData}
+    //   setFormData={setFormData}
+    //   handleFormData={handleFormData}
+    //   x={x}
+    //   setX={setX}
+    // />,
 
-    <FormNewMigraineStep4
+    <FormNewMigraineStep3
       page={page}
       setPage={setPage}
       formData={formData}
