@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ResponsiveLine } from "@nivo/line";
-import service from "../../api/ApiHandler";
+import service from "./../../api/apiHandler";
 
 const IntensityGraph = ({ theme }) => {
   const [migraines, setMigraines] = useState([]);

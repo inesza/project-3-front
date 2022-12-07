@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import service from "./../api/ApiHandler";
+import service from "./../api/apiHandler";
 import {
   getDuration,
   getIntensityDescription,
