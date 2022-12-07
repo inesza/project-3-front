@@ -10,11 +10,13 @@
     font-weight: 500;
 }
 
-.profile {
+.profile,
+.stats-page {
     margin: 1em;
 }
 
-.profile h1 {
+.profile h1,
+.stats-page h1 {
     font-family: var(--abril);
     text-align: center;
     font-size: 3em;

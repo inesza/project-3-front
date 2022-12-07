@@ -30,23 +30,8 @@ const MigraineSingle = () => {
   const navigate = useNavigate();
   const { isShowing, toggleModal } = useModal();
 
-  const [intensityIcon, setIntensityIcon] = useState(null);
-
-  const smileIcon = (
-    <FontAwesomeIcon
-      icon={faFaceSmile}
-      style={{ background: "var(--mint-green)" }}
-    />
-  );
-  const mehIcon = (
-    <FontAwesomeIcon icon={faFaceMeh} style={{ background: "#D7BE95" }} />
-  );
-  const frownIcon = (
-    <FontAwesomeIcon
-      icon={faFaceFrown}
-      style={{ background: "var(--orange)" }}
-    />
-  );
+  const [intensityIcon, setIntensityIcon] = useState(faFaceMeh);
+  const [intensityIconColor, setIntensityIconColor] = useState(null);
 
   useEffect(() => {
     service
@@ -58,16 +43,20 @@ const MigraineSingle = () => {
         console.log(e);
         setErrorMessage(e.response.data.errorMessage);
       });
-
-    if (migraine && migraine.intensity <= 3) {
-      setIntensityIcon(smileIcon);
-    } else if (migraine && migraine.intensity > 3 && migraine.intensity <= 7) {
-      setIntensityIcon(mehIcon);
-    } else if (migraine && migraine.intensity > 7) {
-      setIntensityIcon(frownIcon);
-    }
   }, []);
 
+  useEffect(() => {
+    if (migraine && migraine.intensity <= 3) {
+      setIntensityIcon(faFaceSmile);
+      setIntensityIconColor("var(--mint-green)");
+    } else if (migraine && migraine.intensity > 3 && migraine.intensity <= 7) {
+      setIntensityIcon(faFaceMeh);
+      setIntensityIconColor("#D7BE95");
+    } else if (migraine && migraine.intensity > 7) {
+      setIntensityIcon(faFaceFrown);
+      setIntensityIconColor("var(--orange)");
+    }
+  }, [migraine]);
 
   if (!migraine)
     return (
@@ -106,7 +95,7 @@ const MigraineSingle = () => {
   if (!migraine.end_date) endDate = "Ongoing";
 
   return (
-    <section className="migraine-single" style={{ margin: "1em" }}>
+    <section className="migraine-single">
       <Link to="/profile">
         <FontAwesomeIcon icon={faChevronLeft} />
         <span style={{ textTransform: "uppercase", marginLeft: ".5em" }}>
@@ -151,7 +140,12 @@ const MigraineSingle = () => {
             {intensityDetails.title}
           </p>
         </div>
-        <div className="intensity-icon">{intensityIcon}</div>
+        <div className="intensity-icon">
+          <FontAwesomeIcon
+            icon={intensityIcon}
+            style={{ background: intensityIconColor }}
+          />
+        </div>
       </section>
 
       <section className="phases dark-bg-grey-shadow">
@@ -160,9 +154,15 @@ const MigraineSingle = () => {
       </section>
       <div className="dark-bg-grey-shadow">
         <h3>Trackers</h3>
-        {migraine.selected_trackers?.map((tracker) => tracker.name)}
-        {!migraine.selected_trackers.length &&
-          "No tracker registered for this entry"}
+        <div className="trackers-list">
+          {migraine.selected_trackers?.map((tracker) => (
+            <span className="tracker" key={tracker.name}>
+              {tracker.name}
+            </span>
+          ))}
+          {!migraine.selected_trackers.length &&
+            "No tracker registered for this entry"}
+        </div>
       </div>
       {/* <div className="dark-bg-grey-shadow">
         Treatments: {migraine.treatments?.map((treatment) => treatment)}

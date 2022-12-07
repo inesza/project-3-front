@@ -114,12 +114,15 @@ const Statistics = ({ full }) => {
   }, []);
 
   return (
-    <section className={!full && "stats-section dark-bg-orange-shadow"}>
+    <section className={!full ? "stats-section dark-bg-orange-shadow" : ""}>
       <h2>My Statistics</h2>
       <div className="stats">
-        {stats.map((stat) => {
+        {stats.map((stat, index) => {
           return (
-            <section className={full && "stats-section dark-bg-orange-shadow"}>
+            <section
+              className={full ? "stats-section dark-bg-orange-shadow" : ""}
+              key={index}
+            >
               {stat}
             </section>
           );
