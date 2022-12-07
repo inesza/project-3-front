@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { ResponsiveSunburst } from "@nivo/sunburst";
 import service from "../../api/apiHandler";
 
-const SunburstStats = () => {
+const SunburstStats = ({ theme }) => {
   const [migraines, setMigraines] = useState([]);
 
   useEffect(() => {
@@ -73,7 +73,7 @@ const SunburstStats = () => {
             return subcategory.children.push({
               name: tracker.name,
               color: "hsl(316, 70%, 50%)",
-              count: 0,
+              count: 1,
             });
           } else if (trackers.indexOf(tracker.name) !== -1) {
             console.log(trackers.indexOf(tracker.name));
@@ -92,28 +92,38 @@ const SunburstStats = () => {
   //console.log(data);
 
   return (
-    <div style={{ height: "50rem" }}>
-      <ResponsiveSunburst
-        data={data}
-        margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
-        isInteractive={true}
-        id="name"
-        value="count"
-        cornerRadius={2}
-        borderColor={{ theme: "background" }}
-        colors={{ scheme: "nivo" }}
-        childColor={{
-          from: "color",
-          modifiers: [["brighter", 0.1]],
-        }}
-        enableArcLabels={true}
-        arcLabel="id"
-        arcLabelsSkipAngle={10}
-        arcLabelsTextColor={{
-          from: "color",
-          modifiers: [["darker", 1.4]],
-        }}
-      />
+    <div>
+      <div style={{ textAlign: "center" }}>
+        <h3>Your most common migraine triggers</h3>
+      </div>
+      <div style={{ height: "400px", marginBottom: "1em" }}>
+        <ResponsiveSunburst
+          data={data}
+          margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
+          isInteractive={true}
+          id="name"
+          value="count"
+          theme={theme}
+          cornerRadius={2}
+          borderWidth={3}
+          // borderColor={{ theme: "background" }}
+          borderColor="var(--darkest)"
+          colors={{ scheme: "set3" }}
+          childColor={{
+            from: "color",
+            modifiers: [["darker", 0.6]],
+          }}
+          enableArcLabels={true}
+          arcLabel="id"
+          arcLabelsSkipAngle={10}
+          arcLabelsRadiusOffset={0.5}
+          arcLabelsTextColor="white"
+          // arcLabelsTextColor={{
+          //   from: "color",
+          //   modifiers: [["brighter", 1.4]],
+          // }}
+        />
+      </div>
     </div>
   );
 };

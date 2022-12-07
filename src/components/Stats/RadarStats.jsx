@@ -46,7 +46,7 @@ const RadarStats = ({ theme }) => {
   return (
     <div>
       <div style={{ textAlign: "center" }}>
-        <h3>Your most common migraine triggers</h3>
+        <h3>Your most common categories of migraine triggers</h3>
       </div>
       <div style={{ height: "400px", marginBottom: "1em" }}>
         <ResponsiveRadar

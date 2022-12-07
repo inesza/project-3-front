@@ -12,10 +12,6 @@
         width: calc(50% - 2em);
     }
 
-    section:not(.profile) .migraine-journal .migraine-card {
-        width: 50%;
-    }
-
     .migraine-single {
         margin: 1em auto;
     }
@@ -24,4 +20,40 @@
         width: 100%;
     }
 
+    .profile-new-migraine-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        bottom: 15px;
+        right: 15px;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        transition: .5s;
+        font-size: 3em;
+        box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
+
+    }
+
+    .profile-new-migraine-button span {
+        display: none;
+    }
+
+    .profile-new-migraine-button:hover {
+        box-shadow: 0 0 10px 5px rgb(211 207 255 / 30%);
+        color: white;
+    }
+
+    section:not(.profile) .migraine-journal {
+        flex-direction: row;
+        flex-wrap: wrap;
+        max-width: 800px;
+        gap: 2em;
+    }
+
+    section:not(.profile) .migraine-journal .migraine-card {
+        width: calc(50% - 1em);
+        margin: 0;
+    }
 }

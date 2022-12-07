@@ -20,6 +20,10 @@ nav.top-nav {
 	box-shadow: -5px 5px 10px rgba(211, 207, 255, 0.24);
 }
 
+nav.top-nav span {
+	cursor: pointer;
+}
+
 .side-menu {
 	z-index: 2000;
 }
@@ -35,4 +39,20 @@ header .logo img {
 
 #burger-menu-container {
 	cursor: pointer;
+}
+
+.nav-new-migraine-button {
+	background: var(--mint-green);
+	width: 90%;
+	padding: 1em;
+	text-align: center;
+	color: var(--dark-blue);
+	text-transform: uppercase;
+	font-weight: 500;
+	transition: .5s;
+}
+
+.nav-new-migraine-button:hover {
+	box-shadow: 0 0 10px 5px rgb(211 207 255 / 30%);
+	color: white;
 }
