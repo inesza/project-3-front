@@ -199,9 +199,9 @@ input[type=range]::-webkit-slider-runnable-track {
     gap: 1em;
     overflow-x: auto;
     position: relative;
-    padding: 0 1.5em;
+    padding: 0 1.5em 1.5em;
     /* Mozilla firefox */
-    scrollbar-color: var(--darkest) transparent;
+    scrollbar-color: var(--dark-blue) transparent;
     scrollbar-width: thin;
 }
 
@@ -211,7 +211,20 @@ input[type=range]::-webkit-slider-runnable-track {
 
 /* Ascenseur */
 .trackers::-webkit-scrollbar-thumb {
-    background: var(--darkest);
+    background: var(--dark-blue);
+    border-radius: 8px;
+    transition: .5s;
+    border: 2px solid var(--dark-blue);
+}
+
+.trackers::-webkit-scrollbar-thumb:hover {
+    background: #464e5c;
+    border-radius: 8px;
+}
+
+.trackers::-webkit-scrollbar-track {
+    background: #697994;
+    /* border: 2px solid var(--orange); */
     border-radius: 8px;
 }
 
@@ -260,8 +273,8 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 
-.phase-checkbox label img,
-.trackers img {
+.phase-checkbox .phase-img,
+.trackers .tracker-cat-img {
     text-align: center;
     display: block;
     background-color: var(--dark-blue);
@@ -288,12 +301,12 @@ input[type=range]::-webkit-slider-runnable-track {
     display: none;
 }
 
-.phase-checkbox input:checked+img {
+.phase-checkbox input:checked+.phase-img {
     background-color: var(--lilac);
     color: #fff;
 }
 
-.trackers input:checked+img {
+.trackers input:checked+.tracker-cat-img {
     background-color: var(--orange);
     color: #fff;
 }

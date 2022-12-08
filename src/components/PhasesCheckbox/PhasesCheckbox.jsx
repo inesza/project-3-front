@@ -20,7 +20,10 @@ const PhasesCheckbox = ({ checkboxData, handleTrack, setCheckboxData }) => {
                   }
                   checked={phase.status}
                 />
-                <img src={phase.img} alt={phase.value} />
+
+                <div className="phase-img">
+                  <img src={phase.img} alt={phase.value} />
+                </div>
               </label>
             </div>
             <span>{phase.value}</span>

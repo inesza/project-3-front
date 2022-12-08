@@ -49,7 +49,12 @@ const NewMigraine = () => {
       .then((res) => {
         setTrackersCategory(
           res.data.allTrackersCategory.map((t) => {
-            return { name: t.name, status: false, _id: t._id };
+            return {
+              name: t.name,
+              picture: t.picture,
+              status: false,
+              _id: t._id,
+            };
           })
         );
         setTrackersSubCategory(
