@@ -83,7 +83,7 @@ const MigraineSingle = () => {
       )
       .then(
         setTimeout(() => {
-          navigate("/profile");
+          navigate("/migraines");
         }, 1000)
       )
       .catch((e) => {
@@ -149,8 +149,28 @@ const MigraineSingle = () => {
       </section>
 
       <section className="phases dark-bg-grey-shadow">
-        <h3>Symptoms</h3>
-        {migraine.phases?.map((phase) => phase)}
+        <div className="selected-phases">
+          <h3 style={{ width: "100%" }}>Symptoms</h3>
+          {migraine.phases?.map((phase) => {
+            return (
+              <div key={phase} className="phase-checkbox">
+                <div className="phase-img">
+                  <img
+                    src={
+                      phase === "Other/Unsure"
+                        ? "/images/formImages/other.svg"
+                        : "/images/formImages/" + phase.toLowerCase() + ".svg"
+                    }
+                    alt={phase}
+                  />
+                </div>
+                <span>{phase}</span>
+              </div>
+            );
+          })}
+        </div>
+
+        {!migraine.phases.length && "No symptoms registered for this entry"}
       </section>
       <div className="dark-bg-grey-shadow">
         <h3>Trackers</h3>
@@ -164,12 +184,9 @@ const MigraineSingle = () => {
             "No tracker registered for this entry"}
         </div>
       </div>
-      {/* <div className="dark-bg-grey-shadow">
-        Treatments: {migraine.treatments?.map((treatment) => treatment)}
-      </div> */}
       <div className="dark-bg-grey-shadow">
         <h3>Notes</h3>
-        {migraine.notes && migraine.notes}
+        <p className="migraine-notes">{migraine.notes && migraine.notes}</p>
       </div>
       <ModalConfirmDelete
         isShowing={isShowing}

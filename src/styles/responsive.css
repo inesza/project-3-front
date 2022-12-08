@@ -24,9 +24,16 @@
     margin: 1em auto;
   }
 
+
+    .migraine-single {
+        margin: 1em auto;
+        max-width: 600px;
+    }
+
   .stats-page > section {
     width: 100%;
   }
+
 
   .profile-new-migraine-button {
     display: flex;
