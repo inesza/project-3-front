@@ -15,13 +15,14 @@ const TrackersCheckbox = ({
   setTrackersSubCategory,
   setTrackers,
 }) => {
+  console.log(trackersCategory);
   return (
     <section className="trackers-section">
       <h2>Relevant trackers</h2>
       <section className="trackers">
-        <div className="arrow arrow-left">
+        {/* <div className="arrow arrow-left">
           <FontAwesomeIcon icon={faChevronLeft} />
-        </div>
+        </div> */}
         <div className="trackers">
           {trackersCategory.map((trackerCategory) => {
             return (
@@ -47,17 +48,22 @@ const TrackersCheckbox = ({
                     }
                     checked={trackerCategory.status}
                   />
-                  <img src="/images/formImages/aura.svg" alt="" />
+                  <div className="tracker-cat-img">
+                    <img
+                      src={trackerCategory.picture}
+                      alt={trackerCategory.name}
+                    />
+                  </div>
+
                   <h3>{trackerCategory.name}</h3>
                 </div>
-                {/* <h3>{trackerCategory.name}</h3> */}
               </label>
             );
           })}
         </div>
-        <div className="arrow arrow-right">
+        {/* <div className="arrow arrow-right">
           <FontAwesomeIcon icon={faChevronRight} />
-        </div>
+        </div> */}
       </section>
       {/* Tracker category section ends here * */}
       <section>

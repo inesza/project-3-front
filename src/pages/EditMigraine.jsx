@@ -45,6 +45,7 @@ const EditMigraine = () => {
       .get(`/api/migraines/${id}`)
       .then((res) => {
         let endDate;
+
         const startDate = res.data.start_date.split(".")[0].slice(0, -3);
         const rightNow = new Date().toISOString().split(".")[0].slice(0, -3);
 
@@ -100,7 +101,12 @@ const EditMigraine = () => {
             migraineData,
             formData,
             trackersCategory: res.data.allTrackersCategory.map((t) => {
-              return { name: t.name, status: false, _id: t._id };
+              return {
+                name: t.name,
+                picture: t.picture,
+                status: false,
+                _id: t._id,
+              };
             }),
             trackersSubCategory: res.data.allTrackersSubCategory.map((t) => {
               return {

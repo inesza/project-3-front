@@ -38,14 +38,13 @@ const getHumanReadableDate = (date, format) => {
     day: "numeric",
   };
   if (format === "hours") options.weekday = "short";
-  let readableDate = new Date(date).toLocaleDateString("en-GB", options);
+  let readableDate = new Date(date).toLocaleDateString("en", options);
   if (format === "hours") {
-    readableDate += ` - ${new Date(date).toLocaleTimeString("en-GB", {
+    readableDate += ` - ${new Date(date).toLocaleTimeString("en", {
       hour: "2-digit",
       minute: "2-digit",
     })}`;
   }
-
   //   Display day as human readable format(in english)
   return readableDate;
 };
