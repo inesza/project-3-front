@@ -1,70 +1,95 @@
 @media (width > 650px) {
-
-    .signup,
-    .signin,
-    .new-migraine-container {
-        margin: 1em auto;
-        max-width: 600px;
-    }
+  .signup,
+  .signin,
+  .new-migraine-container {
+    margin: 1em auto;
+    max-width: 600px;
+  }
 }
 
 @media (width > 1024px) {
+  .profile,
+  .stats-page {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+  }
 
-    .profile,
-    .stats-page {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1em;
-    }
+  .profile > section,
+  .stats-page .stats-section {
+    width: calc(50% - 2em);
+  }
 
-    .profile>section,
-    .stats-page .stats-section {
-        width: calc(50% - 2em);
-    }
+  .migraine-single {
+    margin: 1em auto;
+  }
+
 
     .migraine-single {
         margin: 1em auto;
         max-width: 600px;
     }
 
-    .stats-page>section {
-        width: 100%;
-    }
+  .stats-page > section {
+    width: 100%;
+  }
 
-    .profile-new-migraine-button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        bottom: 15px;
-        right: 15px;
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
-        transition: .5s;
-        font-size: 3em;
-        box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
 
-    }
+  .profile-new-migraine-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    transition: 0.5s;
+    font-size: 3em;
+    box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
+  }
 
-    .profile-new-migraine-button span {
-        display: none;
-    }
+  .profile-new-migraine-button span {
+    display: none;
+  }
 
-    .profile-new-migraine-button:hover {
-        box-shadow: 0 0 10px 5px rgb(211 207 255 / 30%);
-        color: white;
-    }
+  .profile-new-migraine-button:hover {
+    box-shadow: 0 0 10px 5px rgb(211 207 255 / 30%);
+    color: white;
+  }
 
-    section:not(.profile) .migraine-journal {
-        flex-direction: row;
-        flex-wrap: wrap;
-        max-width: 800px;
-        gap: 2em;
-    }
+  section:not(.profile) .migraine-journal {
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 800px;
+    gap: 2em;
+  }
 
-    section:not(.profile) .migraine-journal .migraine-card {
-        width: calc(50% - 1em);
-        margin: 0;
-    }
+  section:not(.profile) .migraine-journal .migraine-card {
+    width: calc(50% - 1em);
+    margin: 0;
+  }
+  .home-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+
+  .description-section {
+    width: 50rem;
+    margin: 0 auto;
+    max-width: 70rem;
+  }
+
+  .description h3 {
+    font-size: 2rem;
+  }
+  .description p {
+    font-size: 1.4rem;
+  }
+  .start-btn {
+    margin-top: 6rem;
+  }
 }
