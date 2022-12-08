@@ -94,7 +94,12 @@ const NewMigraine = () => {
           phases.push(phase.value);
         }
       });
+      console.log(formData["end_date"]);
       formData["phases"] = phases;
+      formData["start_date"] = new Date(formData["start_date"]).toUTCString();
+      formData["end_date"] =
+        formData["end_date"] && new Date(formData["end_date"]).toUTCString();
+      console.log(formData);
       formData["selected_trackers"] = trackers
         .filter((tracker) => tracker.status)
         .map((tracker) => tracker._id);

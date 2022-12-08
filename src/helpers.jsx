@@ -22,9 +22,9 @@ const getDuration = (start, end, format) => {
       const seconds = Math.floor(runningTime);
       if (format && format === "short")
         return `Running for ${hours}h${computeTwoDigitNumber(minutes)}`;
-      return `Running for ${hours} hours ${computeTwoDigitNumber(
-        minutes
-      )} minutes `;
+      return `Running for ${hours} ${
+        hours <= 1 ? "hour" : "hours"
+      } ${computeTwoDigitNumber(minutes)} minutes `;
     }
   }
 };

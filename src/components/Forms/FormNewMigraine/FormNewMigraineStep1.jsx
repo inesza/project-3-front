@@ -38,10 +38,10 @@ const FormNewMigraineStep1 = ({
       setStartDate(startDate);
       setFormData({
         ...formData,
-        start_date: event.target.value.toUTCString(),
+        start_date: event.target.value,
       });
     } else if (event.target.name === "end-date") {
-      setFormData({ ...formData, end_date: event.target.value.toUTCString() });
+      setFormData({ ...formData, end_date: event.target.value });
     }
   };
 
