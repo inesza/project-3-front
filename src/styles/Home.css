@@ -6,9 +6,35 @@
     border-radius: 40px;
     display: flex;
     justify-content: center;
-    background: url(/images/logo.svg), var(--dark-blue);
+    background-color: var(--dark-blue);
+    background-size: contain;
+    background-position: center;
     margin: 5em;
     position: relative;
+    animation: background-swap 8s ease infinite, slide 3s ease-in-out infinite;
+}
+
+@keyframes background-swap {
+    0% {
+        background-image: url(/images/homeImages/journal.png);
+    }
+
+    25% {
+        background-image: url(/images/homeImages/mockup-stats.png);
+    }
+
+    50% {
+        background-image: url(/images/homeImages/mockup-new-migraine.png);
+    }
+
+    75% {
+        background-image: url(/images/homeImages/mockup-profile.png);
+    }
+
+    100% {
+        background-image: url(/images/homeImages/journal.png);
+    }
+
 }
 
 .mockup::before {
@@ -28,16 +54,11 @@
     background: #333046;
     z-index: -1;
     bottom: -2.2em;
-    /* left: 15px; */
     height: 30px;
     width: 130%;
     border-radius: 80%;
     filter: blur(.7em);
-    /* box-shadow: -25px -4px 4px 0 rgba(0, 0, 0, 0.75); */
-    /* transform: skew(30deg); */
 }
-
-
 
 .encoche {
     width: 45%;

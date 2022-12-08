@@ -24,6 +24,7 @@
 
     .migraine-single {
         margin: 1em auto;
+        max-width: 600px;
     }
 
     .stats-page>section {
