@@ -4,11 +4,9 @@ const IntensityInput = ({
   name,
   min,
   max,
-  value,
   intensity,
   title,
   description,
-  icon,
   handleFormData,
 }) => {
   return (

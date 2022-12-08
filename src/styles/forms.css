@@ -72,10 +72,6 @@ form select:focus {
     width: 100%;
 }
 
-/* .new-migraine-form :not(.phases) div {
-    width: 100%;
-} */
-
 .new-migraine-container .phases {
     display: flex;
     flex-wrap: wrap;
@@ -254,8 +250,6 @@ input[type=range]::-webkit-slider-runnable-track {
     align-items: center;
     gap: 1em;
     width: 100px;
-    /* width: 200px; */
-    /* overflow: hidden; */
 }
 
 

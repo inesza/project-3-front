@@ -1,15 +1,6 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
 
-const FormSignUpStep1 = ({
-  page,
-  currentUser,
-  setPage,
-  formData,
-  setFormData,
-  x,
-  setX,
-}) => {
+const FormSignUpStep1 = ({ page, setPage, formData, setFormData, x, setX }) => {
   return (
     <motion.div
       initial={{ x: x }}

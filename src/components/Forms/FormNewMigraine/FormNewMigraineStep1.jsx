@@ -1,9 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-// import useCheckbox from "../hooks/useCheckbox";
-import { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
-// import service from "./../api/apiHandler";
+import { useEffect } from "react";
 import { getIntensityDescription } from "../../../helpers";
 import DateInputStart from "../../DateInput/DateInputStart";
 import DateInputEnd from "../../DateInput/DateInputEnd";

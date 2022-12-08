@@ -19,7 +19,6 @@ const getDuration = (start, end, format) => {
       const runningTime = Date.now() - startDateTimestamp;
       const hours = Math.floor(runningTime / 60 / 60 / 1000);
       const minutes = Math.floor(runningTime / 60 / 1000) - hours * 60;
-      const seconds = Math.floor(runningTime);
       if (format && format === "short")
         return `Running for ${hours}h${computeTwoDigitNumber(minutes)}`;
       return `Running for ${hours} ${

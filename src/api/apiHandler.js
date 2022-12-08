@@ -19,13 +19,6 @@ function errorHandler(error) {
   throw error;
 }
 
-// apiHandler.signup = (userInfo) => {
-// 	return apiHandler
-// 		.post("/api/auth/signup")
-// 		.then((res) => res.data)
-// 		.catch(errorHandler)
-// }
-
 const service = {
   // Service is spread to have access to the basics get/post...
   ...apiHandler,
@@ -57,7 +50,5 @@ const service = {
       .catch(errorHandler);
   },
 };
-
-// export default apiHandler
 
 export default service;

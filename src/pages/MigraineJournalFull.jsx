@@ -1,5 +1,5 @@
 import React from "react";
-import MigraineJournalBlock from "../components/Migraines/MigraineJournalBlock";
+import MigraineJournalBlock from "./../components/Migraines/MigraineJournalBlock";
 
 const MigraineJournalFull = () => {
   return (

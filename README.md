@@ -4,7 +4,9 @@
 
 ## [https://migraine-journal.netlify.app](https://migraine-journal.netlify.app)
 
-Migraine Journal is a FullStack Web application made by [@inesza](https://github.com/inesza) and [@hugoviolas](https://github.com/hugoviolas) during the [Ironhack Web Development Bootcamp](https://www.ironhack.com/en/web-development) in only **10 days** 🚀
+Migraine Journal is a FullStack Web application made by [@inesza](https://github.com/inesza) and [@hugoviolas](https://github.com/hugoviolas) during the [Ironhack Web Development Bootcamp](https://www.ironhack.com/en/web-development) in **just over a week** 🚀
+
+This is just the frontend part of the project, you can access the [backend repo from here](https://github.com/hugoviolas/project-3-back).
 
 **Technologies used**
 

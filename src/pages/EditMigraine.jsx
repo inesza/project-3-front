@@ -1,9 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import apiHandler from "../api/apiHandler";
 import service from "../api/apiHandler";
-import axios from "axios";
 import { getIntensityDescription } from "../helpers";
 import IntensityInput from "../components/IntensityInput/IntensityInput";
 import PhasesCheckbox from "../components/PhasesCheckbox/PhasesCheckbox";
@@ -46,14 +44,23 @@ const EditMigraine = () => {
       .then((res) => {
         let endDate;
 
-        const startDate = res.data.start_date.split(".")[0].slice(0, -3);
-        const rightNow = new Date().toISOString().split(".")[0].slice(0, -3);
+        // const startDate = res.data.start_date.split(".")[0].slice(0, -3);
+        const rightNow = new Date();
+
+        // Prefill start date field
+        const prefillDateInput = (input) => {
+          const dateNoHours = new Date(input).toISOString().split("T")[0];
+          const hoursNoDate = new Date(input).toLocaleTimeString().slice(0, -3);
+          return dateNoHours + "T" + hoursNoDate;
+        };
+        const startDate = prefillDateInput(res.data.start_date);
 
         if (res.data.end_date) {
-          endDate = res.data?.end_date.split(".")[0].slice(0, -3);
+          endDate = prefillDateInput(res.data?.end_date);
           setIsFinished(true);
         } else {
-          endDate = rightNow;
+          endDate = prefillDateInput(rightNow);
+          setIsFinished(true);
         }
 
         const selectedPhases = res.data.phases.map((phase) => phase.name);
@@ -148,6 +155,9 @@ const EditMigraine = () => {
         }
       });
       formData["phases"] = phases;
+      formData["start_date"] = new Date(formData["start_date"]).toUTCString();
+      formData["end_date"] =
+        formData["end_date"] && new Date(formData["end_date"]).toUTCString();
       formData["selected_trackers"] = trackers
         .filter((tracker) => tracker.status)
         .map((tracker) => tracker._id);
@@ -221,6 +231,7 @@ const EditMigraine = () => {
             value={end_date}
             min={migraineData.start_date}
             handleDate={handleDate}
+            isFinished={isFinished}
           />
           <IntensityInput
             name="intensity"

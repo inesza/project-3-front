@@ -1,4 +1,3 @@
-import useForm from "./../hooks/useForm";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import service from "./../api/apiHandler";
@@ -7,12 +6,10 @@ import FormSignUpStep2Edit from "./Forms/FormSignUp/FormSignUpStep2Edit";
 import useAuth from "./../auth/useAuth";
 import useModal from "./../hooks/useModal";
 import ModalConfirmDelete from "./ModalConfirmDelete";
-import apiHandler from "./../api/apiHandler";
 
 const FormSignUp = () => {
   const navigate = useNavigate();
   const { isLoggedIn, currentUser, removeUser } = useAuth();
-  const [error, setError] = useState(null);
   const [x, setX] = useState(0);
   const [page, setPage] = useState(0);
   const { isShowing, toggleModal } = useModal();

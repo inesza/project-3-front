@@ -13,6 +13,7 @@ import EditProfile from "./pages/EditProfile";
 import NewMigraine from "./pages/NewMigraine";
 import EditMigraine from "./pages/EditMigraine";
 import AllStats from "./pages/AllStats";
+import Error from "./pages/Error";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             <Route path="/migraines/edit/:id" element={<EditMigraine />} />
             <Route path="/migraines/create" element={<NewMigraine />} />
           </Route>
+          <Route path="*" element={<Error />} />
         </Routes>
       </main>
     </div>

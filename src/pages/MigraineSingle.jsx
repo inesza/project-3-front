@@ -20,8 +20,8 @@ import {
   faFaceFrown,
 } from "@fortawesome/free-regular-svg-icons";
 
-import useModal from "../hooks/useModal";
-import "../styles/MigraineSingle.css";
+import useModal from "./../hooks/useModal";
+import "./../styles/MigraineSingle.css";
 
 const MigraineSingle = () => {
   const [migraine, setMigraine] = useState(null);

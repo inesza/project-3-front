@@ -1,22 +1,17 @@
-// import useForm from "../../hooks/useForm";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiHandler from "../../api/apiHandler";
-import service from "../../api/apiHandler";
-import axios from "axios";
 import FormSignUpStep1 from "./FormSignUp/FormSignUpStep1";
 import FormSignUpStep2 from "./FormSignUp/FormSignUpStep2";
-import ModalConfirmDelete from "../ModalConfirmDelete";
 import useModal from "../../hooks/useModal";
 import useAuth from "../../auth/useAuth";
 import { Link } from "react-router-dom";
-const FormSignUp = ({ edit }) => {
+const FormSignUp = () => {
   const navigate = useNavigate();
   const { isLoggedIn, currentUser, removeUser } = useAuth();
   const [error, setError] = useState(null);
   const [x, setX] = useState(0);
   const [page, setPage] = useState(0);
-  const { isShowing, toggleModal } = useModal();
   const [formData, setFormData] = useState({
     username: "",
     email: "",

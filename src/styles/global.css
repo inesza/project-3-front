@@ -67,7 +67,7 @@ main {
   margin-top: 70px;
 }
 
-main > :first-child {
+main> :first-child {
   padding-top: 2em !important;
 }
 
@@ -154,4 +154,8 @@ div.dark-bg-grey-shadow {
   height: 10rem;
   background-color: var(--darkest);
   margin: 0 auto;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }

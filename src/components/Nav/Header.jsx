@@ -94,7 +94,6 @@ const Header = () => {
                       style={{ marginLeft: "10px" }}
                     />
                   </motion.span>
-
                   <Link
                     to="/migraines/create"
                     className="nav-new-migraine-button"
