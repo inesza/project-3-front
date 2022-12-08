@@ -1,15 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-import axios from "axios";
-import { useState, useEffect } from "react";
-import useCheckbox from "../../../hooks/useCheckbox";
+import { useEffect } from "react";
 import Notes from "../../Notes/Notes";
 
 const FormNewMigraineStep4 = ({
   page,
   setPage,
   formData,
-  setFormData,
   handleFormData,
   x,
   setX,

@@ -19,7 +19,6 @@ const FormSignIn = () => {
     apiHandler
       .signin({ email, password })
       .then((res) => {
-        console.log(res);
         storeToken(res.authToken);
         authenticateUser();
         navigate("/profile");
@@ -64,11 +63,3 @@ const FormSignIn = () => {
 };
 
 export default FormSignIn;
-
-// const token = localStorage.getItem('authToken')
-
-// axios.get("http://localhost:8080/api/private", {
-// 	headers: {
-// 		Authorization: `Bearer ${token}` ,
-// 	},
-// })

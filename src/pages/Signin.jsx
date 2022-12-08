@@ -1,4 +1,4 @@
-import FormSignIn from "../components/Forms/FormSignIn";
+import FormSignIn from "./../components/Forms/FormSignIn";
 import "./../styles/Profile.css";
 const Signin = () => {
   return (

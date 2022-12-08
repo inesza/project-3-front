@@ -115,10 +115,6 @@ const SunburstStats = ({ theme }) => {
           arcLabelsSkipAngle={10}
           arcLabelsRadiusOffset={0.5}
           arcLabelsTextColor="white"
-          // arcLabelsTextColor={{
-          //   from: "color",
-          //   modifiers: [["brighter", 1.4]],
-          // }}
         />
       </div>
     </div>

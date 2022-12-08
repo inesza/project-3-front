@@ -1,11 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import useAuth from "../auth/useAuth";
-import "../styles/Profile.css";
-// import IntensityGraph from "../components/Stats/IntensityGraph";
+import useAuth from "./../auth/useAuth";
+import "./../styles/Profile.css";
 
-import MigraineJournalBlock from "../components/Migraines/MigraineJournalBlock";
-import Statistics from "../components/Stats/Statistics";
+import MigraineJournalBlock from "./../components/Migraines/MigraineJournalBlock";
+import Statistics from "./../components/Stats/Statistics";
 
 const Profile = () => {
   const { isLoggedIn, currentUser, removeUser } = useAuth();
@@ -18,7 +17,13 @@ const Profile = () => {
             Edit my profile
           </Link>
         </div>
-        <h1>Hello {currentUser.username}!</h1>
+        <h1>
+          Hello{" "}
+          <span style={{ textTransform: "capitalize" }}>
+            {currentUser.username}
+          </span>
+          !
+        </h1>
       </section>
 
       <MigraineJournalBlock full={false} />

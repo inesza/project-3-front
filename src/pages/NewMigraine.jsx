@@ -1,20 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Form, useNavigate, useParams } from "react-router-dom";
-// import apiHandler from "../api/apiHandler";
-import service from "../api/apiHandler";
-// import { getIntensityDescription } from "../helpers";
-// import DateInputStart from "../components/DateInput/DateInputStart";
-// import DateInputEnd from "../components/DateInput/DateInputEnd";
-// import IntensityInput from "../components/IntensityInput/IntensityInput";
-// import PhasesCheckbox from "../components/PhasesCheckbox/PhasesCheckbox";
-// import Notes from "../components/Notes/Notes";
-// import TrackersCheckbox from "../components/TrackersCheckbox/TrackersCheckbox";
+import { useNavigate } from "react-router-dom";
+import service from "./../api/apiHandler";
 
-import FormNewMigraineStep1 from "../components/Forms/FormNewMigraine/FormNewMigraineStep1";
-import FormNewMigraineStep2 from "../components/Forms/FormNewMigraine/FormNewMigraineStep2";
-import FormNewMigraineStep3 from "../components/Forms/FormNewMigraine/FormNewMigraineStep3";
-// import FormNewMigraineStep4 from "../components/Forms/FormNewMigraine/FormNewMigraineStep4";
+// Import of all forms screens
+import FormNewMigraineStep1 from "./../components/Forms/FormNewMigraine/FormNewMigraineStep1";
+import FormNewMigraineStep2 from "./../components/Forms/FormNewMigraine/FormNewMigraineStep2";
+import FormNewMigraineStep3 from "./../components/Forms/FormNewMigraine/FormNewMigraineStep3";
 
 const NewMigraine = () => {
   const navigate = useNavigate();
@@ -94,12 +86,10 @@ const NewMigraine = () => {
           phases.push(phase.value);
         }
       });
-      console.log(formData["end_date"]);
       formData["phases"] = phases;
       formData["start_date"] = new Date(formData["start_date"]).toUTCString();
       formData["end_date"] =
         formData["end_date"] && new Date(formData["end_date"]).toUTCString();
-      console.log(formData);
       formData["selected_trackers"] = trackers
         .filter((tracker) => tracker.status)
         .map((tracker) => tracker._id);
@@ -149,7 +139,6 @@ const NewMigraine = () => {
       checkboxData={checkboxData}
       setCheckboxData={setCheckboxData}
     />,
-
     <FormNewMigraineStep2
       page={page}
       setPage={setPage}
@@ -166,17 +155,6 @@ const NewMigraine = () => {
       setTrackersSubCategory={setTrackersSubCategory}
       setTrackers={setTrackers}
     />,
-
-    // <FormNewMigraineStep3
-    //   page={page}
-    //   setPage={setPage}
-    //   formData={formData}
-    //   setFormData={setFormData}
-    //   handleFormData={handleFormData}
-    //   x={x}
-    //   setX={setX}
-    // />,
-
     <FormNewMigraineStep3
       page={page}
       setPage={setPage}
@@ -191,7 +169,7 @@ const NewMigraine = () => {
     return <div>Loading...</div>;
   }
   return (
-    <section className="new-migraine-container">
+    <section className="new-migraine-container overflow-hidden">
       <div>
         <h2>Add new migraine</h2>
 

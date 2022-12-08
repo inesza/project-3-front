@@ -19,7 +19,7 @@ const Home = () => {
           </h1>
 
           <div className="description">
-            <h3>Better control your migraines: </h3>
+            <h2>Take better control your migraines: </h2>
             <p>
               Keep track of your migraine triggers and adapt your life
               accordingly.
@@ -31,9 +31,11 @@ const Home = () => {
             </Link>
           </div>
         </section>
-        <div className="mockup">
-          <div className="encoche"></div>
-        </div>
+        <section className="mockup-container">
+          <div className="mockup">
+            <div className="encoche"></div>
+          </div>
+        </section>
       </div>
     </div>
   );

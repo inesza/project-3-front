@@ -1,28 +1,17 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
 
 const TrackersCheckbox = ({
   trackersCategory,
   trackersSubCategory,
   trackers,
-  checkedTrackers,
   handleTrack,
   setTrackersCategory,
-  setTrackersSubCategory,
   setTrackers,
 }) => {
-  console.log(trackersCategory);
   return (
     <section className="trackers-section">
       <h2>Relevant trackers</h2>
       <section className="trackers">
-        {/* <div className="arrow arrow-left">
-          <FontAwesomeIcon icon={faChevronLeft} />
-        </div> */}
         <div className="trackers">
           {trackersCategory.map((trackerCategory) => {
             return (
@@ -35,7 +24,6 @@ const TrackersCheckbox = ({
                   <input
                     type="radio"
                     id={trackerCategory.name}
-                    // name={trackerCategory.name}
                     name="categorySelector"
                     value={trackerCategory.name}
                     onChange={() =>
@@ -61,9 +49,6 @@ const TrackersCheckbox = ({
             );
           })}
         </div>
-        {/* <div className="arrow arrow-right">
-          <FontAwesomeIcon icon={faChevronRight} />
-        </div> */}
       </section>
       {/* Tracker category section ends here * */}
       <section>
@@ -78,29 +63,9 @@ const TrackersCheckbox = ({
               .map((trackerSubCategory) => {
                 return (
                   <div key={trackerSubCategory._id}>
-                    {/* <div className="tracker-subcategory"> */}
                     <h3 className="tracker-subcategory">
                       {trackerSubCategory.name}
-                      {/* <label htmlFor={trackerSubCategory.name}>
-                          {trackerSubCategory.name}
-                        </label>
-                        <input
-                          type="checkbox"
-                          id={trackerSubCategory.name}
-                          name={trackerSubCategory.name}
-                          value={trackerSubCategory.name}
-                          checked={trackerSubCategory.status}
-                          onChange={() =>
-                            handleTrack(
-                              trackerSubCategory._id,
-                              setTrackersSubCategory,
-                              trackersSubCategory
-                            )
-                          }
-                        /> */}
                     </h3>
-                    {/* </div> */}
-                    {/* {trackerSubCategory.status && */}
                     <div className="trackers-list-selector">
                       {trackers
                         .filter(

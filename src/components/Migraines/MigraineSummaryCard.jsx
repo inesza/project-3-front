@@ -9,8 +9,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const MigraineSummaryCard = ({ migraine }) => {
-  // const day = getHumanReadableDate(migraine.start_date);
-
   getDuration(migraine.start_date, migraine.end_date);
 
   const duration = getDuration(migraine.start_date, migraine.end_date);
